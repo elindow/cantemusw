@@ -69,6 +69,6 @@ class SingersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def singer_params
-      params.require(:singer).permit(:lastName, :firstName, :email, :voice, :joined, :left)
+      params.require(:singer).permit(:lastName, :firstName, :email, :voice, :joined, :left, :join_year, :left_year)
     end
 end

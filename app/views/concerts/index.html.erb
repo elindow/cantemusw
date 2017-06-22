@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Year</th>
       <th>Name</th>
       <th>Venue</th>
       <th>Concertdate</th>
@@ -22,6 +23,7 @@
   <tbody>
     <% @concerts.each do |concert| %>
       <tr>
+        <td><%= concert.concert_year %></td>
         <td><%= concert.name %></td>
         <td><%= concert.venue %></td>
         <td><%= concert.concertdate %></td>
