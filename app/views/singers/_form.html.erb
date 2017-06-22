@@ -1,0 +1,47 @@
+<%= form_for(singer) do |f| %>
+  <% if singer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(singer.errors.count, "error") %> prohibited this singer from being saved:</h2>
+
+      <ul>
+      <% singer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :lastName %>
+    <%= f.text_field :lastName %>
+  </div>
+
+  <div class="field">
+    <%= f.label :firstName %>
+    <%= f.text_field :firstName %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :voice %>
+    <%= f.text_field :voice %>
+  </div>
+
+  <div class="field">
+    <%= f.label :joined %>
+    <%= f.date_select :joined %>
+  </div>
+
+  <div class="field">
+    <%= f.label :left %>
+    <%= f.date_select :left %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

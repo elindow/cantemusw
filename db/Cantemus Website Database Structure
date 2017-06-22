@@ -1,0 +1,41 @@
+Cantemus Website Database Structure
+
+Concert:
+Name
+Concertdate:date
+Venue
+Conductor
+Accompanist
+Theme:text
+Notes:text
+SongOrder:array
+
+has_and_belongs_to_many singers
+has_and_belongs_to_many songs
+has_many Videos
+has_many Photos
+has_many Recordings
+
+Singers:
+LastName
+FirstName
+Email
+Voice
+Joined:date
+Left:date
+
+has_and_belongs_to_many Concerts
+has_and_belongs_to_manySongs    //soloist in
+has_many Headshots
+
+Songs:
+Name
+Source
+Composer
+Lyricist
+Genre
+Type
+
+
+has_and_belongs_to_many Concerts
+has_and_belongs_to_many Performers

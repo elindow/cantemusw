@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @singer.lastName %>
+</p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @singer.firstName %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @singer.email %>
+</p>
+
+<p>
+  <strong>Voice:</strong>
+  <%= @singer.voice %>
+</p>
+
+<p>
+  <strong>Joined:</strong>
+  <%= @singer.joined %>
+</p>
+
+<p>
+  <strong>Left:</strong>
+  <%= @singer.left %>
+</p>
+
+<%= link_to 'Edit', edit_singer_path(@singer) %> |
+<%= link_to 'Back', singers_path %>

@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @concert.name %>
+</p>
+
+<p>
+  <strong>Venue:</strong>
+  <%= @concert.venue %>
+</p>
+
+<p>
+  <strong>Concertdate:</strong>
+  <%= @concert.concertdate %>
+</p>
+
+<p>
+  <strong>Conductor:</strong>
+  <%= @concert.conductor %>
+</p>
+
+<p>
+  <strong>Accompanist:</strong>
+  <%= @concert.accompanist %>
+</p>
+
+<p>
+  <strong>Theme:</strong>
+  <%= @concert.theme %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @concert.notes %>
+</p>
+
+<p>
+  <strong>Songs:</strong>
+  <% @concert.songs.each do |t| %>
+    <td><%= t.name%></td>
+    - 
+  <% end %>
+</p>
+
+<p>
+  <strong>Singers:</strong>
+  <% @concert.singers.each do |t| %>
+    <td><%= t.lastName%></td>
+    - 
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_concert_path(@concert) %> |
+<%= link_to 'Back', concerts_path %>

@@ -1,0 +1,70 @@
+<%= form_for(concert) do |f| %>
+  <% if concert.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(concert.errors.count, "error") %> prohibited this concert from being saved:</h2>
+
+      <ul>
+      <% concert.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :venue %>
+    <%= f.text_field :venue %>
+  </div>
+
+  <div class="field">
+    <%= f.label :concertdate %>
+    <%= f.date_select :concertdate %>
+  </div>
+
+  <div class="field">
+    <%= f.label :conductor %>
+    <%= f.text_field :conductor %>
+  </div>
+
+  <div class="field">
+    <%= f.label :accompanist %>
+    <%= f.text_field :accompanist %>
+  </div>
+
+  <div class="field">
+    <%= f.label :theme %>
+    <%= f.text_area :theme %>
+  </div>
+
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
+  </div>
+
+  <div class="field">
+   <% for singer in Singer.all.order(:lastName) %>
+     <% if (true)%>
+       <%= check_box_tag "concert[singer_ids][]", singer.id, @concert.singers.include?(singer) %>
+       <%= singer.lastName %>
+     <% end %>
+   <%end%>
+</div>
+
+  <div class="field">
+   <% for song in Song.all.order(:name) %>
+     <% if (true)%>
+       <%= check_box_tag "concert[song_ids][]", song.id, @concert.songs.include?(song) %>
+       <%= song.name %>
+     <% end %>
+   <%end%>
+</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
