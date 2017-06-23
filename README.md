@@ -1,24 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a rails driven database designed to store information about Cantemus concerts performed over the last 25 years.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version - 2.3.3
 
 * System dependencies
 
-* Configuration
+* Configuration - Rails 5.0.3
 
-* Database creation
+* Database - PostgreSQL 9.6
 
-* Database initialization
+* Database initialization - 3 tables - concerts, singers, and songs 
 
-* How to run the test suite
+* How to run the test suite - under construction 
 
-* Services (job queues, cache servers, search engines, etc.)
+* Services (job queues, cache servers, search engines, etc.) -
 
-* Deployment instructions
+* Deployed on Heroku - https://cantemusw.herokuapp.com/concerts
 
 * ...

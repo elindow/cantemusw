@@ -4,7 +4,9 @@ class SingersController < ApplicationController
   # GET /singers
   # GET /singers.json
   def index
-    @singers = Singer.all
+    #@singers = Singer.all
+    @q = Singer.search(params[:q])
+    @singers = @q.result(distinct: true)
   end
 
   # GET /singers/1
@@ -69,6 +71,6 @@ class SingersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def singer_params
-      params.require(:singer).permit(:lastName, :firstName, :email, :voice, :joined, :left, :join_year, :left_year)
+      params.require(:singer).permit(:lastName, :firstName, :email, :voice, :joined, :left, :join_year, :left_year, {:concert_ids => []}, {:song_ids => []})
     end
 end

@@ -2,6 +2,14 @@
 
 <h1>Concerts</h1>
 
+<%= search_form_for @q do |f| %>
+    <%= f.label :concert_year_eq, "Year=", :style => "display: inline-block" %>
+    <%= f.search_field :concert_year_eq, :id => "searchfpn" %>
+    <%= f.label :name_cont, "Name contains=", :style => "display: inline-block" %>
+    <%= f.search_field :name_cont, :id => "searchfpn" %>
+    <%= f.submit %>
+<% end %>
+
 <table>
   <thead>
     <tr>

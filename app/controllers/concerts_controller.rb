@@ -4,7 +4,9 @@ class ConcertsController < ApplicationController
   # GET /concerts
   # GET /concerts.json
   def index
-    @concerts = Concert.all
+    #@concerts = Concert.all
+    @q = Concert.search(params[:q])
+    @concerts = @q.result(distinct: true)
   end
 
   # GET /concerts/1
@@ -69,6 +71,6 @@ class ConcertsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def concert_params
-      params.require(:concert).permit(:name, :venue, :concertdate, :conductor, :accompanist, :theme, :notes, {:singer_ids => []}, {:song_ids => []}, :concert_year)
+      params.require(:concert).permit(:name, :venue, :concertdate, :conductor, :accompanist, :theme, :notes, :concert_year, {:singer_ids => []}, {:song_ids => []})
     end
 end

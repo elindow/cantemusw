@@ -41,6 +41,29 @@
     <%= f.number_field :left_year %>
   </div>
 
+  <div> | Concerts: </div>
+
+  <div class="field"> 
+   <% for concert in Concert.all.order(:concert_year) %>
+     <% if (true)%>
+       <%= check_box_tag "singer[concert_ids][]", concert.id, @singer.concerts.include?(concert) %>
+       <%= concert.concert_year %>
+     <% end %>
+   <%end%>
+  </div>
+
+  <div> | Soloist In:  </div>
+
+  <div class="field">
+   <% for song in Song.all.order(:name) %>
+     <% if (true)%>
+       <%= check_box_tag "singer[song_ids][]", song.id, @singer.songs.include?(song) %>
+       <%= song.name %>
+     <% end %>
+     |
+   <%end%>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

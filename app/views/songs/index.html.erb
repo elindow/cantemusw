@@ -2,6 +2,16 @@
 
 <h1>Songs</h1>
 
+<%= search_form_for @q do |f| %>
+    <%= f.label :name_cont, "Name:", :style => "display: inline-block" %>
+    <%= f.search_field :name_cont, :id => "searchfpn" %>
+    <%= f.label :composer_cont, "Composer:", :style => "display: inline-block" %>
+    <%= f.search_field :composer_cont, :id => "searchfpn" %>
+    <%= f.label :genre_cont, "Genre:", :style => "display: inline-block" %>
+    <%= f.search_field :genre_cont, :id => "searchfpn" %>
+    <%= f.submit %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -11,6 +21,9 @@
       <th>Lyricist</th>
       <th>Genre</th>
       <th>Type</th>
+      <th>Concerts</th>
+      <th>Soloists</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,6 +37,8 @@
         <td><%= song.lyricist %></td>
         <td><%= song.genre %></td>
         <td><%= song.songType %></td>
+        <td><%= song.concerts.count %></td>
+        <td><%= song.singers.count %></td>
         <td><%= link_to 'Show', song %></td>
         <td><%= link_to 'Edit', edit_song_path(song) %></td>
         <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>

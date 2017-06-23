@@ -1,6 +1,7 @@
 Cantemus Website Database Structure
 
 Concert:
+Year:integer
 Name
 Concertdate:date
 Venue
@@ -21,8 +22,10 @@ LastName
 FirstName
 Email
 Voice
-Joined:date
-Left:date
+Joined:date  //currently unused
+Left:date    //currently unused
+join_date:integer
+left_date:integer
 
 has_and_belongs_to_many Concerts
 has_and_belongs_to_manySongs    //soloist in

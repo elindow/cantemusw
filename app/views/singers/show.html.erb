@@ -30,5 +30,23 @@
   <%= @singer.left_year %>
 </p>
 
+<p>
+  <strong>Concerts:</strong>
+  <% @singer.concerts.each do |t| %>
+    <td><%= t.concert_year%></td>
+    - 
+  <% end %>
+</p>
+
+<p>
+  <strong>Soloist In:</strong>
+  <% @singer.songs.each do |t| %>
+    <td><%= t.name%></td>
+    - 
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_singer_path(@singer) %> |
-<%= link_to 'Back', singers_path %>
+<%= link_to 'Back', singers_path %>     |   
+
+<%= link_to 'Add New Singer', new_singer_path %>

@@ -30,5 +30,22 @@
   <%= @song.songType %>
 </p>
 
+<p>
+  <strong>In Concerts:</strong>
+  <% @song.concerts.each do |t| %>
+    <td><%= t.concert_year%></td>
+    - 
+  <% end %>
+</p>
+
+<p>
+  <strong>Soloists:</strong>
+  <% @song.singers.each do |t| %>
+    <td><%= t.lastName%></td>
+    - 
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_song_path(@song) %> |
-<%= link_to 'Back', songs_path %>
+<%= link_to 'Back', songs_path %> |
+<%= link_to 'Add New Song', new_song_path %>

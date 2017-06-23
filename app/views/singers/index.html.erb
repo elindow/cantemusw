@@ -2,6 +2,14 @@
 
 <h1>Singers</h1>
 
+<%= search_form_for @q do |f| %>
+    <%= f.label :lastName_cont, "Last Name:", :style => "display: inline-block" %>
+    <%= f.search_field :lastName_cont, :id => "searchfpn" %>
+    <%= f.label :voice_cont, "Voice:", :style => "display: inline-block" %>
+    <%= f.search_field :voice_cont, :id => "searchfpn" %>
+    <%= f.submit %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -11,11 +19,15 @@
       <th>Voice</th>
       <th>Joined</th>
       <th>Left</th>
+      <th>Concerts</th>
+      <th>Solos</th>
+ 
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
+    <% @singers = @singers.sort_by {|singer| (singer.lastName)}%>
     <% @singers.each do |singer| %>
       <tr>
         <td><%= singer.lastName %></td>
@@ -24,6 +36,8 @@
         <td><%= singer.voice %></td>
         <td><%= singer.join_year %></td>
         <td><%= singer.left_year %></td>
+        <td><%= singer.concerts.count %></td>
+        <td><%= singer.songs.count %></td>
         <td><%= link_to 'Show', singer %></td>
         <td><%= link_to 'Edit', edit_singer_path(singer) %></td>
         <td><%= link_to 'Destroy', singer, method: :delete, data: { confirm: 'Are you sure?' } %></td>

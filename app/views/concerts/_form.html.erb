@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :concert_year %>
+    <%= f.label :year %>
     <%= f.number_field :concert_year %>
   </div>
 
@@ -51,14 +51,18 @@
     <%= f.text_area :notes %>
   </div>
 
-  <div class="field">
+  <div> | Singers | </div>
+
+  <div class="field"> 
    <% for singer in Singer.all.order(:lastName) %>
      <% if (true)%>
        <%= check_box_tag "concert[singer_ids][]", singer.id, @concert.singers.include?(singer) %>
        <%= singer.lastName %>
      <% end %>
    <%end%>
-</div>
+  </div>
+
+  <div> | Songs | </div>
 
   <div class="field">
    <% for song in Song.all.order(:name) %>

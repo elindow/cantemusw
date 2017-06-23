@@ -37,11 +37,32 @@
   </div>
 
   <div class="field">
-    <%= f.label :songType %>
+    <%= f.label :Type %>
     <%= f.text_field :songType %>
   </div>
+
+  <div class="field">
+   <% for concert in Concert.all.order(:concert_year) %>
+     <% if (true)%>
+       <%= check_box_tag "song[concert_ids][]", concert.id, @song.concerts.include?(concert) %>
+       <%= concert.concert_year %>
+     <% end %>
+     |
+   <%end%>
+
+ <div> | Soloists:  </div>
+
+  <div class="field">
+   <% for singer in Singer.all.order(:lastName) %>
+     <% if (true)%>
+       <%= check_box_tag "song[singer_ids][]", singer.id, @song.singers.include?(singer) %>
+       <%= singer.lastName %>
+     <% end %>
+     |
+   <%end%>
 
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
