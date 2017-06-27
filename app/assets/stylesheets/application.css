@@ -13,3 +13,7 @@
  *= require style
  *= require_self
  */
+table, th, td {
+   border: 1px solid black;
+   padding: 0px 3px 0px 5px;
+}

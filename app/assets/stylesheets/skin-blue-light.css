@@ -63,7 +63,8 @@
 }
 .skin-blue-light .content-wrapper,
 .skin-blue-light .main-footer {
-  border-left: 1px solid #d2d6de;
+  border-left: 5px solid #d2d6de;
+  padding-top: 0px;
 }
 .skin-blue-light .user-panel > .info,
 .skin-blue-light .user-panel > .info > a {
