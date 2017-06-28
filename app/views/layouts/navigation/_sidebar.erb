@@ -49,12 +49,18 @@
           <i class="fa fa-angle-left pull-right">
           </i></a>
         <ul class="treeview-menu">
+          <% if user_signed_in? %>
+            <li>
+              <a href="#"><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete  %></a>
+            </li>
+          <% else %>
           <li>
-            <a href="#"> Link in level 2</a>
+            <a href="#"><%= link_to 'Sign In', new_user_session_path %></a>
           </li>
           <li>
-            <a href="#"> Link in level 2</a>
+            <a href="#"><%= link_to 'New User Signup', new_user_registration_path %></a>
           </li>
+          <% end %>
         </ul>
       </li>
     </ul>
