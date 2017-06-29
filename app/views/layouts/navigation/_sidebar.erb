@@ -7,7 +7,11 @@
       </div>
       <div class="pull-left info">
         <p>
-          Eric Lindow
+          <% if user_signed_in? %>
+              <span class="hidden-xs"><%= current_user.name %></span>
+            <% else %>
+              Not signed in
+            <% end %>
         </p>
         <a href="#">
           <i class="fa fa-circle text-success">
@@ -52,6 +56,9 @@
           <% if user_signed_in? %>
             <li>
               <a href="#"><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete  %></a>
+            </li>
+            <li>
+              <a href="#"><%= link_to 'Profile', edit_user_registration_path %></a>
             </li>
           <% else %>
           <li>

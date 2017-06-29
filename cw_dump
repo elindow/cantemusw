@@ -220,6 +220,60 @@ ALTER SEQUENCE songs_id_seq OWNED BY songs.id;
 
 
 --
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip inet,
+    last_sign_in_ip inet,
+    confirmation_token character varying,
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    unconfirmed_email character varying,
+    failed_attempts integer DEFAULT 0 NOT NULL,
+    unlock_token character varying,
+    locked_at timestamp without time zone,
+    name character varying,
+    member boolean,
+    admin boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE users OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
 -- Name: concerts id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -241,6 +295,13 @@ ALTER TABLE ONLY songs ALTER COLUMN id SET DEFAULT nextval('songs_id_seq'::regcl
 
 
 --
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
 -- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -256,6 +317,7 @@ environment	development	2017-05-28 03:32:27.112049	2017-05-28 03:32:27.112049
 COPY concerts (id, name, venue, concertdate, conductor, accompanist, theme, notes, created_at, updated_at, concert_year) FROM stdin;
 1	Songs of Peace and Love	New Rochelle Library	2017-05-21	Jena Smith	Mariana Salzman			2017-05-28 03:46:23.062985	2017-06-22 18:49:43.900728	2017
 2	6 Degrees of Separation	New Jersey	2017-06-23	Jena Smith	Mariana Salzman			2017-06-23 00:17:08.564308	2017-06-23 00:17:08.564308	2011
+3	The French Twist	New Rochelle Library	2006-05-06	Jena Smith	Mariana Salzman	A witty dedication (and expose) of French Culture tongue and cheek through music and narration		2017-06-28 17:26:45.699454	2017-06-28 17:29:18.878299	2006
 \.
 
 
@@ -263,7 +325,7 @@ COPY concerts (id, name, venue, concertdate, conductor, accompanist, theme, note
 -- Name: concerts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('concerts_id_seq', 2, true);
+SELECT pg_catalog.setval('concerts_id_seq', 3, true);
 
 
 --
@@ -289,6 +351,24 @@ COPY concerts_singers (concert_id, singer_id) FROM stdin;
 1	12
 1	4
 1	3
+1	15
+3	13
+3	7
+3	8
+3	9
+3	10
+3	12
+3	20
+3	1
+3	25
+3	26
+3	27
+3	30
+3	31
+3	32
+3	33
+3	34
+3	35
 \.
 
 
@@ -325,6 +405,7 @@ COPY schema_migrations (version) FROM stdin;
 20170622182707
 20170622184536
 20170623181523
+20170627233348
 \.
 
 
@@ -345,6 +426,29 @@ COPY singers (id, "lastName", "firstName", email, voice, joined, "left", created
 11	Grochowski	Wanda	WGrochiowski@somers.k12.ny.usa	Alto	\N	\N	2017-06-22 21:53:17.312856	2017-06-22 21:54:46.932064	\N	\N
 3	Smith	Jena	JenaCarole@aol.com	Conductor	\N	\N	2017-06-22 21:44:10.807268	2017-06-23 17:39:33.701123	1988	\N
 4	Salzman	Marianna	Yuriart1@yahoo.com	Accompanist	\N	\N	2017-06-22 21:45:22.585124	2017-06-23 17:55:06.022646	\N	\N
+13	Albert	Evelyn		Soprano	\N	\N	2017-06-28 17:07:05.313523	2017-06-28 17:07:05.313523	\N	\N
+14	Cheskin	Joel		Bass	\N	\N	2017-06-28 17:07:32.656295	2017-06-28 17:07:32.656295	\N	\N
+15	Diones	George		Tenor	\N	\N	2017-06-28 17:08:01.008223	2017-06-28 17:08:01.008223	\N	\N
+18	Goldman	Millicent			\N	\N	2017-06-28 17:09:09.671944	2017-06-28 17:09:09.671944	\N	\N
+19	Hettman	Brenda			\N	\N	2017-06-28 17:09:31.961139	2017-06-28 17:09:31.961139	\N	\N
+21	Leibowitz	Gillian			\N	\N	2017-06-28 17:10:05.689491	2017-06-28 17:10:05.689491	\N	\N
+22	Lucas	Vicki			\N	\N	2017-06-28 17:10:23.123876	2017-06-28 17:10:23.123876	\N	\N
+25	Mohr	Eugene		Bass	\N	\N	2017-06-28 17:11:20.787547	2017-06-28 17:11:20.787547	\N	\N
+29	Weinberg	Howard		Bass	\N	\N	2017-06-28 17:12:46.255071	2017-06-28 17:12:46.255071	\N	\N
+16	Geller	Mimi	Mmewisic@aol.com	Soprano	\N	\N	2017-06-28 17:08:32.465925	2017-06-28 17:13:56.997305	\N	\N
+17	Gelman	Yoram	YGelman@worldnet.att.net		\N	\N	2017-06-28 17:08:53.533484	2017-06-28 17:14:28.560192	\N	\N
+20	Kingley	Emily	EPKingsley@aol.com	Alto	\N	\N	2017-06-28 17:09:48.320829	2017-06-28 17:15:00.584413	\N	\N
+23	Matilaine	John	jmatilaine@aol.com	Bass	\N	\N	2017-06-28 17:10:48.33317	2017-06-28 17:15:39.771518	\N	\N
+24	Miernik	Marlene	ypstrustees@compuserve.com	Alto	\N	\N	2017-06-28 17:11:05.1407	2017-06-28 17:16:04.36281	\N	\N
+26	Oshodi	Adekunle	Adekunle41@aol.com	Tenor	\N	\N	2017-06-28 17:11:48.650698	2017-06-28 17:16:29.106999	\N	\N
+27	Rozner	Judy	brozner@aol.com	Soprano	\N	\N	2017-06-28 17:12:00.337636	2017-06-28 17:16:45.56673	\N	\N
+28	Salchow	Bill	wsalchow@computer.net	Bass	\N	\N	2017-06-28 17:12:30.261187	2017-06-28 17:17:08.9061	\N	\N
+30	Werner	Lucy	103643.3522@compuserve.com	Alto	\N	\N	2017-06-28 17:13:11.831244	2017-06-28 17:17:44.935168	\N	\N
+31	Barry	Jane		Soprano	\N	\N	2017-06-28 17:29:44.289537	2017-06-28 17:29:44.289537	\N	\N
+32	Fruchtman	Meredith			\N	\N	2017-06-28 17:30:05.153675	2017-06-28 17:30:05.153675	\N	\N
+33	Jackson	Audley		Bass	\N	\N	2017-06-28 17:30:25.270875	2017-06-28 17:30:25.270875	\N	\N
+34	Mallette	Janice			\N	\N	2017-06-28 17:30:46.606192	2017-06-28 17:30:46.606192	\N	\N
+35	Sarna	John		Bass	\N	\N	2017-06-28 17:31:14.550134	2017-06-28 17:31:14.550134	\N	\N
 \.
 
 
@@ -352,7 +456,7 @@ COPY singers (id, "lastName", "firstName", email, voice, joined, "left", created
 -- Name: singers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('singers_id_seq', 12, true);
+SELECT pg_catalog.setval('singers_id_seq', 35, true);
 
 
 --
@@ -393,6 +497,22 @@ SELECT pg_catalog.setval('songs_id_seq', 11, true);
 
 
 --
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY users (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, confirmation_token, confirmed_at, confirmation_sent_at, unconfirmed_email, failed_attempts, unlock_token, locked_at, name, member, admin, created_at, updated_at) FROM stdin;
+1	elindow@verizon.net	$2a$11$7SMvbTrQyeZ1geX8T0rfOOxvw0ZuKyivgsittGHW5fS116pt.p2da	\N	\N	\N	2	2017-06-28 16:58:30.521792	2017-06-28 16:53:57.197145	127.0.0.1	127.0.0.1	sx47ywcfsVhSfhZ58ez2	2017-06-28 16:53:20.104892	2017-06-28 16:24:46.550349	\N	0	\N	\N	Eric Lindow	t	t	2017-06-28 16:24:46.550349	2017-06-28 16:58:30.523815
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('users_id_seq', 1, true);
+
+
+--
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -430,6 +550,28 @@ ALTER TABLE ONLY singers
 
 ALTER TABLE ONLY songs
     ADD CONSTRAINT songs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
 
 
 --

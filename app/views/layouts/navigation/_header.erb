@@ -97,8 +97,12 @@ Cantemus
         </li>
         <li class="dropdown user user-menu">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <img alt="User Image" class="user-image" src="http://placehold.it/160x160" />
-          <span class="hidden-xs">Eric Lindow</span>
+            <% if user_signed_in? %>
+              <img alt="User Image" class="user-image" src="http://placehold.it/160x160" />
+              <span class="hidden-xs"><%= current_user.name %></span>
+            <% else %>
+              Not Signed In
+            <% end %>
           </a>
           <ul class="dropdown-menu">
             <li class="user-header">
@@ -120,12 +124,22 @@ Cantemus
               </div>
             </li>
             <li class="user-footer">
-              <div class="pull-left">
-                <a class="btn btn-default btn-flat" href="#"> Profile</a>
-              </div>
-              <div class="pull-right">
-                <a class="btn btn-default btn-flat" href="#"> Sign out</a>
-              </div>
+              <% if user_signed_in? %>            
+                <div class="pull-left">
+                  <a href="#"><%= link_to 'Profile', edit_user_registration_path, :class => "btn btn-default btn-flat" %></a>
+                </div>
+                <div class="pull-right">
+                  <a href="#"><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete, :class => "btn btn-default btn-flat" %></a>
+                </div>
+              <% else %>
+               <div class="pull-left">
+                  <a href="#"><%= link_to 'Register', new_user_registration_path, :class => "btn btn-default btn-flat" %></a>
+                </div>
+                <div class="pull-right">
+                  <a href="#"><%= link_to 'Sign In', new_user_session_path, :class => "btn btn-default btn-flat" %></a>
+                </div>
+              <% end %>
+              
             </li>
           </ul>
         </li>
