@@ -30,7 +30,7 @@
     <% @concerts = @concerts.sort_by {|concert| (concert.concert_year)}.reverse%>
     <% @concerts.each do |concert| %>
       <tr>
-        <td><%= concert.concert_year %></td>
+        <td><%= link_to "#{concert.concert_year}", concert %></td>
         <td><%= concert.name %></td>
         <td><%= concert.venue %></td>
         <td><%= concert.concertdate %></td>

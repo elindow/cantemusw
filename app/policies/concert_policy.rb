@@ -1,6 +1,10 @@
 class ConcertPolicy < ApplicationPolicy
 
 	def update?
-		user.admin?
+		if user.nil? 
+			false
+		else
+			user.admin?
+		end
 	end
 end

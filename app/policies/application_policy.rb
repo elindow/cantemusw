@@ -31,7 +31,11 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    if user.admin?
+      true
+    else
+      false
+    end
   end
 
   def scope

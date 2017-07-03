@@ -1,9 +1,12 @@
 class ConcertsController < ApplicationController
   before_action :set_concert, only: [:show, :edit, :update, :destroy]
 
+  #current_or_guest_user
+
   # GET /concerts
   # GET /concerts.json
   def index
+    current_or_guest_user
     #@concerts = Concert.all
     @q = Concert.search(params[:q])
     @concerts = @q.result(distinct: true)
@@ -12,6 +15,7 @@ class ConcertsController < ApplicationController
   # GET /concerts/1
   # GET /concerts/1.json
   def show
+      authorize @concert
   end
 
   # GET /concerts/new
@@ -42,7 +46,7 @@ class ConcertsController < ApplicationController
   # PATCH/PUT /concerts/1
   # PATCH/PUT /concerts/1.json
   def update
-    authorize @concert, :update?
+    authorize @concert
     respond_to do |format|
       if @concert.update(concert_params)
         format.html { redirect_to @concert, notice: 'Concert was successfully updated.' }
