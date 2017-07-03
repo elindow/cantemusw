@@ -27,6 +27,7 @@
   </thead>
 
   <tbody>
+    <% @concerts = @concerts.sort_by {|concert| (concert.concert_year)}.reverse%>
     <% @concerts.each do |concert| %>
       <tr>
         <td><%= concert.concert_year %></td>
@@ -40,8 +41,10 @@
         <td><%= concert.songs.count %></td>
         <td><%= concert.singers.count %></td>
         <td><%= link_to 'Show', concert, :class => 'btn btn-success btn-sm active'  %></td>
-        <td><%= link_to 'Edit', edit_concert_path(concert), :class => 'btn btn-warning btn-sm active'  %></td>
-        <td><%= link_to 'Destroy', concert, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-sm active'  %></td>
+        <% if policy(concert).update? %>
+          <td><%= link_to 'Edit', edit_concert_path(concert), :class => 'btn btn-warning btn-sm active'  %></td>
+          <td><%= link_to 'Destroy', concert, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-sm active'  %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

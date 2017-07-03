@@ -1,4 +1,9 @@
 Punch List
 
 1. Full access to devise views - whitelist name variable 
-2. 
+2. To fix bcrypt after bundle install:
+	a. gem uninstall bcrypt (select option 3)
+	b. gem uninstall bcrypt -ruby (option 3)
+	c. install bcrypt --platform=ruby
+
+3. 

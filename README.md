@@ -14,6 +14,12 @@ Things you may want to cover:
 
 * Database initialization - 3 tables - concerts, singers, and songs 
 
+* Database search through Ransack
+
+* User authentication through Devise
+
+* Data access authorization through  
+
 * How to run the test suite - under construction 
 
 * Services (job queues, cache servers, search engines, etc.) -

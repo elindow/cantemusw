@@ -42,6 +42,7 @@ class ConcertsController < ApplicationController
   # PATCH/PUT /concerts/1
   # PATCH/PUT /concerts/1.json
   def update
+    authorize @concert, :update?
     respond_to do |format|
       if @concert.update(concert_params)
         format.html { redirect_to @concert, notice: 'Concert was successfully updated.' }

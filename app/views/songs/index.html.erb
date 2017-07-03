@@ -29,6 +29,7 @@
   </thead>
 
   <tbody>
+    <% @songs = @songs.sort_by {|song| (song.name)}%>
     <% @songs.each do |song| %>
       <tr>
         <td><%= song.name %></td>
