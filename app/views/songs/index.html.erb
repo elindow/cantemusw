@@ -2,14 +2,19 @@
 
 <h1>Songs</h1>
 
+<% can = policy(Song).create? %>
+
 <%= search_form_for @q do |f| %>
+    <%= f.submit "Search by:" %> &nbsp | &nbsp ->
     <%= f.label :name_cont, "Name:", :style => "display: inline-block" %>
-    <%= f.search_field :name_cont, :id => "searchfpn" %>
+    <%= f.search_field :name_cont, :id => "searchfpn" %> ->
     <%= f.label :composer_cont, "Composer:", :style => "display: inline-block" %>
-    <%= f.search_field :composer_cont, :id => "searchfpn" %>
+    <%= f.search_field :composer_cont, :id => "searchfpn" %> ->
     <%= f.label :genre_cont, "Genre:", :style => "display: inline-block" %>
-    <%= f.search_field :genre_cont, :id => "searchfpn" %>
-    <%= f.submit %>
+    <%= f.search_field :genre_cont, :id => "searchfpn" %> &nbsp | &nbsp
+    <% if can %>
+      <%= link_to 'New Song', new_song_path, :class => 'btn btn-success btn-sm active' %>
+    <% end %>
 <% end %>
 
 <table>
@@ -21,8 +26,8 @@
       <th>Lyricist</th>
       <th>Genre</th>
       <th>Type</th>
-      <th>Concerts</th>
-      <th>Soloists</th>
+      <th><%= link_to 'Concerts', concerts_path %></th>
+      <th><%= link_to 'Solos', singers_path %></th>
 
       <th colspan="3"></th>
     </tr>
@@ -32,7 +37,7 @@
     <% @songs = @songs.sort_by {|song| (song.name)}%>
     <% @songs.each do |song| %>
       <tr>
-        <td><%= song.name %></td>
+        <td><%= link_to "#{song.name}", song %></td>
         <td><%= song.source %></td>
         <td><%= song.composer %></td>
         <td><%= song.lyricist %></td>
@@ -40,9 +45,11 @@
         <td><%= song.songType %></td>
         <td><%= song.concerts.count %></td>
         <td><%= song.singers.count %></td>
-        <td><%= link_to 'Show', song %></td>
-        <td><%= link_to 'Edit', edit_song_path(song) %></td>
-        <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if false %><td><%= link_to 'Show', song %></td><% end %>
+        <% if policy(song).update? %>
+          <td><%= link_to 'Edit', edit_song_path(song), :class => 'btn btn-success btn-sm active' %></td>
+          <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-sm active' %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -50,6 +57,11 @@
 
 <br>
 
-<%= link_to 'New Song', new_song_path %>
+<% if can %>
+  <%= link_to 'New Song', new_song_path, :class => 'btn btn-success btn-sm active' %>
+<% end %>
+
+<% if false %>
 <%= link_to 'Concerts', concerts_path %>
 <%= link_to 'Singers', singers_path %>
+<% end %>

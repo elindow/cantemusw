@@ -1,3 +1,5 @@
+<h3> Concert </h3>
+
 <p>
   <strong>Year:</strong>
   <%= @concert.concert_year %>
@@ -54,5 +56,17 @@
   <% end %>
 </p>
 
+<%= link_to 'Back', concerts_path, :class => 'btn btn-primary btn-sm active' %>     |   
+
+<% if policy(Concert).update? %>
+  <%= link_to 'Edit', edit_concert_path(@concert), :class => 'btn btn-warning btn-sm active' %> |
+<% end %>
+
+<% if policy(Concert).create? %>
+  <%= link_to 'New Concert', new_concert_path, :class => 'btn btn-success btn-sm active' %>
+<% end %>
+
+<% if false %>
 <%= link_to 'Edit', edit_concert_path(@concert) %> |
 <%= link_to 'Back', concerts_path %>
+<% end %>

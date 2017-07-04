@@ -1,11 +1,14 @@
 <h1>Concerts</h1>
 
+<% can = policy(Concert).create? %>
+
 <%= search_form_for @q do |f| %>
+    <%= f.submit "Search by:"%> &nbsp | &nbsp ->
     <%= f.label :concert_year_eq, "Year=", :style => "display: inline-block" %>
-    <%= f.search_field :concert_year_eq, :id => "searchfpn" %>
+    <%= f.search_field :concert_year_eq, :id => "searchfpn" %> %> ->
     <%= f.label :name_cont, "Name contains=", :style => "display: inline-block" %>
-    <%= f.search_field :name_cont, :id => "searchfpn" %>
-    <%= f.submit %>
+    <%= f.search_field :name_cont, :id => "searchfpn" %> &nbsp | &nbsp ->
+    <% if  can %><%= link_to 'New Concert', new_concert_path, :class => 'btn btn-success btn-sm active' %><% end %>
 <% end %>
 
 <table>
@@ -19,8 +22,8 @@
       <th>Accompanist</th>
       <th>Theme</th>
       <th>Notes</th>
-      <th>Songs</th>
-      <th>Singers</th>
+      <th><%= link_to 'Songs', songs_path %></th>
+      <th><%= link_to 'Singers', singers_path %></th>
       
       <th colspan="3"></th>
     </tr>
@@ -40,7 +43,7 @@
         <td><%= concert.notes %></td>
         <td><%= concert.songs.count %></td>
         <td><%= concert.singers.count %></td>
-        <td><%= link_to 'Show', concert, :class => 'btn btn-success btn-sm active'  %></td>
+        <% if false %> <td><%= link_to 'Show', concert, :class => 'btn btn-success btn-sm active'  %></td><% end %>
         <% if policy(concert).update? %>
           <td><%= link_to 'Edit', edit_concert_path(concert), :class => 'btn btn-warning btn-sm active'  %></td>
           <td><%= link_to 'Destroy', concert, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-sm active'  %></td>
@@ -52,6 +55,4 @@
 
 <br>
 
-<%= link_to 'New Concert', new_concert_path %>
-<%= link_to 'Songs', songs_path %>
-<%= link_to 'Singers', singers_path %>
+<% if  can %><%= link_to 'New Concert', new_concert_path, :class => 'btn btn-success btn-sm active' %><% end %>

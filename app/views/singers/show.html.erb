@@ -1,3 +1,5 @@
+<h2>Singer</h2>
+
 <p>
   <strong>Lastname:</strong>
   <%= @singer.lastName %>
@@ -44,7 +46,12 @@
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_singer_path(@singer) %> |
-<%= link_to 'Back', singers_path %>     |   
+<%= link_to 'Back', singers_path, :class => 'btn btn-primary btn-sm active' %>     |   
 
-<%= link_to 'Add New Singer', new_singer_path %>
+<% if policy(Singer).update? %>
+  <%= link_to 'Edit', edit_singer_path(@singer), :class => 'btn btn-warning btn-sm active' %> |
+<% end %>
+
+<% if policy(Singer).create? %>
+  <%= link_to 'New Singer', new_singer_path, :class => 'btn btn-success btn-sm active' %>
+<% end %>

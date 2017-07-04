@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-
+//  require turbolinks
+//  require turbolinks-jquery  
 //= require jquery.slimscroll.min
 //= require_tree .
