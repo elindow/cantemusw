@@ -6,4 +6,8 @@ Punch List
 	b. gem uninstall bcrypt -ruby (option 3)
 	c. install bcrypt --platform=ruby
 
-3. 
+3. To push dev database to heroku:
+	pg_dump -Fc --no-acl --no-owner -h localhost cantemusw_development > cantemusw_development01.dump
+	heroku pg:backups:restore "https://s3.amazonaws.com/cantemuswrestore/cantemusw_development01.dump" DATABASE_URL
+	
+4. Quick db grab: pg_dump -f "cw_dump" cantemusw_development
