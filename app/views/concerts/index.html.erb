@@ -4,11 +4,14 @@
 <% can = policy(Concert).create? %>
 
 <%= search_form_for @q do |f| %>
-    <%= f.submit "Search by:"%> &nbsp | &nbsp ->
+    <%= f.submit "Search by:", :class => 'btn btn-success btn-sm active' %> &nbsp | &nbsp ->
     <%= f.label :concert_year_eq, "Year=", :style => "display: inline-block" %>
     <%= f.search_field :concert_year_eq, :id => "searchfpn" %> %> ->
     <%= f.label :name_cont, "Name contains=", :style => "display: inline-block" %>
     <%= f.search_field :name_cont, :id => "searchfpn" %> &nbsp | &nbsp ->
+    <%= f.label :venue_cont, "Venue contains=", :style => "display: inline-block" %>
+    <%= f.search_field :venue_cont, :id => "searchfpn" %> &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp | &nbsp ->
+
     <% if  can %><%= link_to 'New Concert', new_concert_path, :class => 'btn btn-success btn-sm active' %><% end %>
 <% end %>
 

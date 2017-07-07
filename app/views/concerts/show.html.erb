@@ -51,7 +51,7 @@
 <p>
   <strong>Singers:</strong>
     <% @concert.singers.sort_by{|singer| (singer.lastName)}.each do |t| %>
-      <td><%= t.lastName%></td>
+      <td><%= t.firstName[0]+" "+t.lastName%></td>
       - 
  
       <% end %>

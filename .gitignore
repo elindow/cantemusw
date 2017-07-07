@@ -19,3 +19,9 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+#ignore punch list since contains secret data
+.PunchList
+
+#ignore database dumps
+.cantemus_development04.dump

@@ -57,7 +57,7 @@
    <% for singer in Singer.all.order(:lastName) %>
      <% if (true)%>
        <%= check_box_tag "concert[singer_ids][]", singer.id, @concert.singers.include?(singer) %>
-       <%= singer.lastName %>
+       <%= singer.firstName[0] + ". " + singer.lastName + " - " %>
      <% end %>
    <%end%>
   </div>
