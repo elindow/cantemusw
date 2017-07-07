@@ -10,10 +10,12 @@
   <%= @singer.firstName %>
 </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @singer.email %>
-</p>
+<% if policy(Singer).update? %>
+  <p>
+    <strong>Email:</strong>
+    <%= @singer.email %>
+  </p>
+<% end %>
 
 <p>
   <strong>Voice:</strong>

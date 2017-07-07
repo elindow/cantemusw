@@ -50,10 +50,11 @@
 
 <p>
   <strong>Singers:</strong>
-  <% @concert.singers.each do |t| %>
-    <td><%= t.lastName%></td>
-    - 
-  <% end %>
+    <% @concert.singers.sort_by{|singer| (singer.lastName)}.each do |t| %>
+      <td><%= t.lastName%></td>
+      - 
+ 
+      <% end %>
 </p>
 
 <%= link_to 'Back', concerts_path, :class => 'btn btn-primary btn-sm active' %>     |   

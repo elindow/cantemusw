@@ -1,4 +1,5 @@
-<h1>Concerts</h1>
+<h3>Concerts</h3>
+<h5>Total Count: <%= Concert.count %></h5>
 
 <% can = policy(Concert).create? %>
 
@@ -17,7 +18,7 @@
       <th>Year</th>
       <th>Name</th>
       <th>Venue</th>
-      <th>Concertdate</th>
+      <th>Concert Date</th>
       <th>Conductor</th>
       <th>Accompanist</th>
       <th>Theme</th>
@@ -36,7 +37,7 @@
         <td><%= link_to "#{concert.concert_year}", concert %></td>
         <td><%= concert.name %></td>
         <td><%= concert.venue %></td>
-        <td><%= concert.concertdate %></td>
+        <td><%= concert.concertdate.strftime("%m/%d/%y") %></td>
         <td><%= concert.conductor %></td>
         <td><%= concert.accompanist %></td>
         <td><%= concert.theme %></td>

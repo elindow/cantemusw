@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Singers</h1>
+<h3>Singers</h3>
+<h5>Total Count: <%= Singer.count %></h5>
 
 <% can = policy(Singer).create? %>
 
@@ -9,8 +10,8 @@
     <%= f.label :lastName_cont, "Last Name:", :style => "display: inline-block" %>
     <%= f.search_field :lastName_cont, :id => "searchfpn" %> |
     <%= f.label :voice_cont, "Voice:", :style => "display: inline-block" %>
-    <%= f.search_field :voice_cont, :id => "searchfpn" %> &nbsp | &nbsp ->
-    <% if can %><%= link_to 'New Singer', new_singer_path, :class => 'btn btn-success btn-sm active' %><% end %>
+    <%= f.search_field :voice_cont, :id => "searchfpn" %> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
+    <% if can %><%= link_to 'New Singer', new_singer_path, :class => 'btn btn-success btn-sm active margin-left: 35px;' %><% end %>
 <% end %>
 
 <table>
@@ -18,7 +19,9 @@
     <tr>
       <th>Lastname</th>
       <th>Firstname</th>
-      <th>Email</th>
+      <% if policy(Singer).update? %>
+        <th>Email</th>
+      <% end %>
       <th>Voice</th>
       <th>Joined</th>
       <th>Left</th>
@@ -35,7 +38,9 @@
       <tr>
         <td><%= link_to "#{singer.lastName}", singer %></td>
         <td><%= singer.firstName %></td>
-        <td><%= singer.email %></td>
+        <% if policy(singer).update? %>
+          <td><%= singer.email %></td>
+        <% end %>  
         <td><%= singer.voice %></td>
         <td><%= singer.join_year %></td>
         <td><%= singer.left_year %></td>

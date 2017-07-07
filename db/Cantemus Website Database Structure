@@ -42,3 +42,6 @@ Type
 
 has_and_belongs_to_many Concerts
 has_and_belongs_to_many Performers
+
+
+Cantemus, Latin for 'Let us sing', was formed for the pleasure of a group of musicians, each of whom is a vocal soloist, instrumentalist, or has an extensive choral background. Formed in 1988, Cantemus has presented regular concerts through out the New York area for almost 3 decades. These concerts use a theme to connect a diverse range of musical styles into a coherent whole- solos, ensembles and choral music from classical, operatic, musical theater, popular, folk and jazz sources. The group has been on 3 European tours, France in 1995, Prague, Marienbad, Vienna and Salzburg in 2002 and The Netherlands in 2004.

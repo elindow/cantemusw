@@ -1,13 +1,28 @@
 Punch List
 
 1. Full access to devise views - whitelist name variable 
-2. To fix bcrypt after bundle install:
+2. Dev and production mailing config
+3. Lists of songs, singers in Concert, Singers, Songs etc. in alphabetical order
+4. Lists of songs, singers, etc. active links
+5. Static page (about, history, etc.) - HighVoltage?
+6. Clean up non-functional Bootstrap items
+7. Import/store images - CarrierWave/Rmagick/ImageMagick?
+8. Full search page/search box works in sidebar
+9. Add info to middle of top navbar
+10. User administration page
+11. Authorization testing through Pundit  
+12. Prettify display of singers and songs in other models
+
+
+
+Notes:
+I. To fix bcrypt after bundle install:
 	a. gem uninstall bcrypt (select option 3)
 	b. gem uninstall bcrypt -ruby (option 3)
 	c. install bcrypt --platform=ruby
 
-3. To push dev database to heroku:
+II. To push dev database to heroku:
 	pg_dump -Fc --no-acl --no-owner -h localhost cantemusw_development > cantemusw_development01.dump
 	heroku pg:backups:restore "https://s3.amazonaws.com/cantemuswrestore/cantemusw_development01.dump" DATABASE_URL
 	
-4. Quick db grab: pg_dump -f "cw_dump" cantemusw_development
+III. Quick db grab: pg_dump -f "cw_dump" cantemusw_development

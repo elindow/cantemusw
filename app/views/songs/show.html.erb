@@ -40,6 +40,7 @@
 
 <p>
   <strong>Soloists:</strong>
+  <% @song.singers.sort %>
   <% @song.singers.each do |t| %>
     <td><%= t.lastName%></td>
     - 

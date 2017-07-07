@@ -32,6 +32,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :arranger %>
+    <%= f.text_field :arranger %>
+  </div>
+
+  <div class="field">
     <%= f.label :genre %>
     <%= f.text_field :genre %>
   </div>
@@ -62,7 +67,7 @@
    <%end%>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Save Song', :class => 'btn btn-success btn-sm active' %>
   </div>
 
 <% end %>
