@@ -6,7 +6,7 @@
 <% can = policy(Singer).create? %>
 
 <%= search_form_for @q do |f| %>
-    <%= f.submit "Search by:", :class => 'btn btn-success btn-sm active' %>  &nbsp | &nbsp ->
+    <%= f.submit "Search by:", :class => 'btn btn-info btn-sm active' %>  &nbsp | &nbsp ->
     <%= f.label :lastName_cont, "Last Name:", :style => "display: inline-block" %>
     <%= f.search_field :lastName_cont, :id => "searchfpn" %> |
     <%= f.label :voice_cont, "Voice:", :style => "display: inline-block" %>

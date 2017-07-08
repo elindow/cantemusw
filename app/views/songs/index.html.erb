@@ -6,7 +6,7 @@
 <% can = policy(Song).create? %>
 
 <%= search_form_for @q do |f| %>
-    <%= f.submit "Search by:", :class => 'btn btn-success btn-sm active' %> &nbsp | &nbsp ->
+    <%= f.submit "Search by:", :class => 'btn btn-info btn-sm active' %> &nbsp | &nbsp ->
     <%= f.label :name_cont, "Name:", :style => "display: inline-block" %>
     <%= f.search_field :name_cont, :id => "searchfpn" %> ->
     <%= f.label :composer_cont, "Composer:", :style => "display: inline-block" %>
@@ -28,6 +28,7 @@
       <th>Arranger</th>
       <th>Genre</th>
       <th>Type</th>
+      <th>Year</th>
       <th>Notes</th>
       <th><%= link_to 'Concerts', concerts_path %></th>
       <th><%= link_to 'Solos', singers_path %></th>
@@ -41,13 +42,14 @@
     <% @songs = @songs.sort_by {|song| (song.name)}%>
     <% @songs.each do |song| %>
       <tr>
-        <td><%= link_to "#{song.name}", song %></td>
-        <td><%= song.source %></td>
-        <td><%= song.composer %></td>
-        <td><%= song.lyricist %></td>
+        <td><%= link_to "#{song.name[0..20]}", song %></td>
+        <td><%= song.source[0..20] %></td>
+        <td><%= song.composer[0..20] %></td>
+        <td><%= song.lyricist[0..20] %></td>
         <td><%= song.arranger %></td>
         <td><%= song.genre %></td>
         <td><%= song.songType %></td>
+        <td><%= song.concerts.first.concert_year %></td>
         <td><%= song.notes %></td>
         <td><%= song.concerts.count %></td>
         <td><%= song.singers.count %></td>

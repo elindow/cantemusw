@@ -5,6 +5,7 @@ class SingersController < ApplicationController
   # GET /singers.json
   def index
     #@singers = Singer.all
+    authorize Singer
     @q = Singer.search(params[:q])
     @singers = @q.result(distinct: true)
   end
@@ -12,21 +13,25 @@ class SingersController < ApplicationController
   # GET /singers/1
   # GET /singers/1.json
   def show
+    authorize Singer
   end
 
   # GET /singers/new
   def new
     @singer = Singer.new
+    authorize @singer
   end
 
   # GET /singers/1/edit
   def edit
+    authorize Singer
   end
 
   # POST /singers
   # POST /singers.json
   def create
     @singer = Singer.new(singer_params)
+    authorize @singer
 
     respond_to do |format|
       if @singer.save
@@ -42,6 +47,7 @@ class SingersController < ApplicationController
   # PATCH/PUT /singers/1
   # PATCH/PUT /singers/1.json
   def update
+    authorize @singer
     respond_to do |format|
       if @singer.update(singer_params)
         format.html { redirect_to @singer, notice: 'Singer was successfully updated.' }

@@ -6,7 +6,9 @@ class ConcertsController < ApplicationController
   # GET /concerts
   # GET /concerts.json
   def index
+
     current_or_guest_user
+    authorize Concert
     #@concerts = Concert.all
     @q = Concert.search(params[:q])
     @concerts = @q.result(distinct: true)
@@ -15,22 +17,25 @@ class ConcertsController < ApplicationController
   # GET /concerts/1
   # GET /concerts/1.json
   def show
-      authorize @concert
+    authorize Concert
   end
 
   # GET /concerts/new
   def new
     @concert = Concert.new
+    authorize @concert
   end
 
   # GET /concerts/1/edit
   def edit
+    authorize Concert
   end
 
   # POST /concerts
   # POST /concerts.json
   def create
     @concert = Concert.new(concert_params)
+    authorize @concert
 
     respond_to do |format|
       if @concert.save
@@ -61,6 +66,7 @@ class ConcertsController < ApplicationController
   # DELETE /concerts/1
   # DELETE /concerts/1.json
   def destroy
+    authorize @concert
     @concert.destroy
     respond_to do |format|
       format.html { redirect_to concerts_url, notice: 'Concert was successfully destroyed.' }

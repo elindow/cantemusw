@@ -5,6 +5,7 @@ class SongsController < ApplicationController
   # GET /songs.json
   def index
     #@songs = Song.all
+    authorize Song
     @q = Song.search(params[:q])
     @songs = @q.result(distinct: true)
   end
@@ -12,21 +13,25 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
+    authorize Song
   end
 
   # GET /songs/new
   def new
     @song = Song.new
+    authorize @song
   end
 
   # GET /songs/1/edit
   def edit
+    authorize @song
   end
 
   # POST /songs
   # POST /songs.json
   def create
     @song = Song.new(song_params)
+    authorize @song
 
     respond_to do |format|
       if @song.save
@@ -42,6 +47,7 @@ class SongsController < ApplicationController
   # PATCH/PUT /songs/1
   # PATCH/PUT /songs/1.json
   def update
+    authorize @song
     respond_to do |format|
       if @song.update(song_params)
         format.html { redirect_to @song, notice: 'Song was successfully updated.' }
@@ -56,6 +62,7 @@ class SongsController < ApplicationController
   # DELETE /songs/1
   # DELETE /songs/1.json
   def destroy
+    authorize @song
     @song.destroy
     respond_to do |format|
       format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
@@ -71,6 +78,6 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:name, :source, :composer, :lyricist, :genre, :songType, {:singer_ids => []}, {:concert_ids => []})
+      params.require(:song).permit(:name, :source, :composer, :lyricist, :arranger, :genre, :songType, :notes, {:singer_ids => []}, {:concert_ids => []})
     end
 end

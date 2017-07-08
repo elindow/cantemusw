@@ -1,12 +1,15 @@
 class SongPolicy < ApplicationPolicy
 
-	def show?
-		user?
+	def index?
+		true
 	end
-	
+
+	def show?
+		true
+	end
 
 	def create?
-		if user.nil? 
+		if user.nil? || !user.admin?
 			false
 		else
 			user.admin?
@@ -20,6 +23,10 @@ class SongPolicy < ApplicationPolicy
 			user.admin?
 		end
 	end
+
+  	def destroy?
+    	user.admin?
+  	end
 
   class Scope < Scope
     def resolve

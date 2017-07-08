@@ -1,16 +1,16 @@
 class ConcertPolicy < ApplicationPolicy
 
+	def index?
+		true
+	end
+
 	def show?
-		if user.nil? 
-			false
-		else
-			true
-		end
+		true
 	end
 	
 
 	def create?
-		if user.nil? 
+		if user.nil? || !user.admin?
 			false
 		else
 			user.admin?
@@ -18,12 +18,16 @@ class ConcertPolicy < ApplicationPolicy
 	end
 
 	def update?
-		if user.nil? 
+		if user.nil? || !user.admin?
 			false
 		else
 			user.admin?
 		end
 	end
+
+	def destroy?
+    	user.admin?
+  	end
 
 
 end

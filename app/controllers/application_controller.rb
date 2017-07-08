@@ -2,7 +2,7 @@
   #helper_method :current_or_guest_user
 
   include Pundit
-  #after_action :verify_authorized
+  after_action :verify_authorized
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from Pundit::AuthorizationNotPerformedError, with: :user_not_authorized
 
@@ -46,6 +46,20 @@ def configure_permitted_parameters
 end
 
 private
+
+  #flash message for pundit errors
+def user_not_authorized
+      flash[:warning] = t "You are not authorized to perform this action."
+      root_path
+  end
+
+  if false
+  def user_not_authorized(exception)
+      policy_name = exception.policy.class.to_s_underscore
+      flash[:warning] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
+      redirect_to(request.referrer || root_path)
+  end
+  end
 
   # devise guess user handling private methods 
   # called (once) when the user logs in, insert any code your application needs

@@ -1,7 +1,7 @@
 Cantemus Website Database Structure
 
 Concert:
-Year:integer
+concert_year:integer
 Name
 Concertdate:date
 Venue

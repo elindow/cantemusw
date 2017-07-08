@@ -1,7 +1,15 @@
 class SingerPolicy < ApplicationPolicy
 
+	def index?
+		true
+	end
+
+	def index?
+		true
+	end
+
 	def show?
-		user?
+		true
 	end
 	
 	def create?
@@ -19,6 +27,10 @@ class SingerPolicy < ApplicationPolicy
 			user.admin?
 		end
 	end
+
+	def destroy?
+    	user.admin?
+  	end
 
   class Scope < Scope
     def resolve
