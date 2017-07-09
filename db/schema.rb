@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170707172655) do
+ActiveRecord::Schema.define(version: 20170709045919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 20170707172655) do
     t.string   "accompanist"
     t.text     "theme"
     t.text     "notes"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "concert_year"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.decimal  "concert_year", precision: 6, scale: 2
   end
 
   create_table "concerts_singers", id: false, force: :cascade do |t|
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20170707172655) do
   end
 
   create_table "singers", force: :cascade do |t|
-    t.string   "lastName"
-    t.string   "firstName"
+    t.string   "last_name"
+    t.string   "first_name"
     t.string   "email"
     t.string   "voice"
     t.date     "joined"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20170707172655) do
     t.string   "composer"
     t.string   "lyricist"
     t.string   "genre"
-    t.string   "songType"
+    t.string   "song_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "arranger"

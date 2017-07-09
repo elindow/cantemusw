@@ -31,7 +31,7 @@
 
 <p>
   <strong>Type:</strong>
-  <%= @song.songType %>
+  <%= @song.song_type %>
 </p>
 
 <p>
@@ -51,7 +51,7 @@
   <strong>Soloists:</strong>
   <% @song.singers.sort %>
   <% @song.singers.each do |t| %>
-    <td><%= t.lastName%></td>
+    <td><%= t.first_name[0]+" "+t.last_name%></td>
     - 
   <% end %>
 </p>

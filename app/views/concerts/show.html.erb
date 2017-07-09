@@ -50,8 +50,8 @@
 
 <p>
   <strong>Singers:</strong>
-    <% @concert.singers.sort_by{|singer| (singer.lastName)}.each do |t| %>
-      <td><%= t.firstName[0]+" "+t.lastName%></td>
+    <% @concert.singers.sort_by{|singer| (singer.last_name)}.each do |t| %>
+      <td><%= t.first_name[0]+" "+t.last_name%></td>
       - 
  
       <% end %>

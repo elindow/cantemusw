@@ -43,7 +43,7 @@
 
   <div class="field">
     <%= f.label :Type %>
-    <%= f.text_field :songType %>
+    <%= f.text_field :song_type %>
   </div>
 
   <div class="field">
@@ -63,10 +63,10 @@
  <div> | Soloists:  </div>
 
   <div class="field">
-   <% for singer in Singer.all.order(:lastName) %>
+   <% for singer in Singer.all.order(:last_name) %>
      <% if (true)%>
        <%= check_box_tag "song[singer_ids][]", singer.id, @song.singers.include?(singer) %>
-       <%= singer.firstName[0] + " " + singer.lastName %>
+       <%= singer.first_name[0] + " " + singer.last_name %>
      <% end %>
      |
    <%end%>

@@ -60,6 +60,10 @@
             <li>
               <a href="#"><%= link_to 'Profile', edit_user_registration_path %></a>
             </li>
+            <li>
+              <%# sign_out :current_user %>
+              <a href="#"><%= link_to 'New Sign In', new_user_session_path %></a>
+            </li>
           <% else %>
           <li>
             <a href="#"><%= link_to 'Sign In', new_user_session_path %></a>

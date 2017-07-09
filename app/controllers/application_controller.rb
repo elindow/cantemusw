@@ -41,14 +41,16 @@
 protected
 
 def configure_permitted_parameters
-  devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-  devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+  devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :member])
+  devise_parameter_sanitizer.permit(:account_update, keys: [:name, :member])
 end
 
 private
 
+
+
   #flash message for pundit errors
-def user_not_authorized
+  def user_not_authorized
       flash[:warning] = t "You are not authorized to perform this action."
       root_path
   end

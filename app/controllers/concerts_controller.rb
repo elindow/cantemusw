@@ -1,6 +1,8 @@
 class ConcertsController < ApplicationController
   before_action :set_concert, only: [:show, :edit, :update, :destroy]
 
+  helper_method :sort_column, :sort_direction
+
   #current_or_guest_user
 
   # GET /concerts
@@ -12,6 +14,7 @@ class ConcertsController < ApplicationController
     #@concerts = Concert.all
     @q = Concert.search(params[:q])
     @concerts = @q.result(distinct: true)
+    @concerts = @concerts.order("#{sort_column} #{sort_direction}")
   end
 
   # GET /concerts/1
@@ -82,6 +85,18 @@ class ConcertsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def concert_params
-      params.require(:concert).permit(:name, :venue, :concertdate, :conductor, :accompanist, :theme, :notes, :concert_year, {:singer_ids => []}, {:song_ids => []})
+      params.require(:concert).permit(:name, :venue, :concertdate, :conductor, :accompanist, :theme, :notes, :concert_year, {:singer_ids => []}, {:song_ids => []}, :sort)
+    end
+
+    def sortable_columns
+      ["concert_year", "name", "venue", "concertdate"]
+    end
+
+    def sort_column
+      sortable_columns.include?(params[:column]) ? params[:column] : "concert_year"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end

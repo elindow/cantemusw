@@ -1,6 +1,8 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
 
+  helper_method :sort_column, :sort_direction
+
   # GET /songs
   # GET /songs.json
   def index
@@ -8,6 +10,7 @@ class SongsController < ApplicationController
     authorize Song
     @q = Song.search(params[:q])
     @songs = @q.result(distinct: true)
+    @songs = @songs.order("#{sort_column} #{sort_direction}")
   end
 
   # GET /songs/1
@@ -78,6 +81,18 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:name, :source, :composer, :lyricist, :arranger, :genre, :songType, :notes, {:singer_ids => []}, {:concert_ids => []})
+      params.require(:song).permit(:name, :source, :composer, :lyricist, :arranger, :genre, :song_type, :notes, {:singer_ids => []}, {:concert_ids => []})
+    end
+
+    def sortable_columns
+      ["name", "source", "composer","lyricist","arranger","genre","song_type"]
+    end
+
+    def sort_column
+      sortable_columns.include?(params[:column]) ? params[:column] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

@@ -7,8 +7,8 @@
 
 <%= search_form_for @q do |f| %>
     <%= f.submit "Search by:", :class => 'btn btn-info btn-sm active' %>  &nbsp | &nbsp ->
-    <%= f.label :lastName_cont, "Last Name:", :style => "display: inline-block" %>
-    <%= f.search_field :lastName_cont, :id => "searchfpn" %> |
+    <%= f.label :last_name_cont, "Last Name:", :style => "display: inline-block" %>
+    <%= f.search_field :last_name_cont, :id => "searchfpn" %> |
     <%= f.label :voice_cont, "Voice:", :style => "display: inline-block" %>
     <%= f.search_field :voice_cont, :id => "searchfpn" %> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
     <% if can %><%= link_to 'New Singer', new_singer_path, :class => 'btn btn-success btn-sm active margin-left: 35px;' %><% end %>
@@ -17,12 +17,12 @@
 <table>
   <thead>
     <tr>
-      <th>Lastname</th>
-      <th>Firstname</th>
+      <th><%= sort_link "last_name", "Last Name" %></th>
+      <th><%= sort_link "first_name", "First Name" %></th>
       <% if policy(Singer).update? %>
-        <th>Email</th>
+        <th><%= sort_link "email" %></th>
       <% end %>
-      <th>Voice</th>
+      <th><%= sort_link "voice" %></th>
       <th>Joined</th>
       <th>Left</th>
       <th><%= link_to 'Concerts', concerts_path %></th>
@@ -33,11 +33,11 @@
   </thead>
 
   <tbody>
-    <% @singers = @singers.sort_by {|singer| (singer.lastName)}%>
+    
     <% @singers.each do |singer| %>
       <tr>
-        <td><%= link_to "#{singer.lastName}", singer %></td>
-        <td><%= singer.firstName %></td>
+        <td><%= link_to "#{singer.last_name}", singer %></td>
+        <td><%= singer.first_name %></td>
         <% if policy(singer).update? %>
           <td><%= singer.email %></td>
         <% end %>  

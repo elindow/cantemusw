@@ -17,10 +17,10 @@ class SongPolicy < ApplicationPolicy
 	end
 
 	def update?
-		if user.nil? 
+		if user.nil?  || !user.admin?
 			false
 		else
-			user.admin?
+			user.admin? 
 		end
 	end
 

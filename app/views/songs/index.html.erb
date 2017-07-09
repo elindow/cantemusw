@@ -21,14 +21,14 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Source</th>
-      <th>Composer</th>
-      <th>Lyricist</th>
-      <th>Arranger</th>
-      <th>Genre</th>
-      <th>Type</th>
-      <th>Year</th>
+      <th><%= sort_link "name" %></th>
+      <th><%= sort_link "source" %></th>
+      <th><%= sort_link "composer" %></th>
+      <th><%= sort_link "lyricist" %></th>
+      <th><%= sort_link "arranger" %></th>
+      <th><%= sort_link "genre" %></th>
+      <th><%= sort_link "song_type", "Type" %></th>
+      <th><%= "Year" %></th>
       <th>Notes</th>
       <th><%= link_to 'Concerts', concerts_path %></th>
       <th><%= link_to 'Solos', singers_path %></th>
@@ -39,7 +39,7 @@
   </thead>
 
   <tbody>
-    <% @songs = @songs.sort_by {|song| (song.name)}%>
+    
     <% @songs.each do |song| %>
       <tr>
         <td><%= link_to "#{song.name[0..20]}", song %></td>
@@ -48,8 +48,8 @@
         <td><%= song.lyricist[0..20] %></td>
         <td><%= song.arranger %></td>
         <td><%= song.genre %></td>
-        <td><%= song.songType %></td>
-        <td><%= song.concerts.first.concert_year %></td>
+        <td><%= song.song_type %></td>
+        <td><%= if song.concerts.nil? then song.concerts.first.concert_year end %></td>
         <td><%= song.notes %></td>
         <td><%= song.concerts.count %></td>
         <td><%= song.singers.count %></td>

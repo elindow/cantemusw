@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :year %>
-    <%= f.number_field :concert_year %>
+    <%= f.number_field :concert_year, class: :text_field, step: :any %>
   </div>
 
   <div class="field">
@@ -54,10 +54,10 @@
   <div> | Singers | </div>
 
   <div class="field"> 
-   <% for singer in Singer.all.order(:lastName) %>
+   <% for singer in Singer.all.order(:last_name) %>
      <% if (true)%>
        <%= check_box_tag "concert[singer_ids][]", singer.id, @concert.singers.include?(singer) %>
-       <%= singer.firstName[0] + ". " + singer.lastName + " - " %>
+       <%= singer.first_name[0] + ". " + singer.last_name + " - " %>
      <% end %>
    <%end%>
   </div>

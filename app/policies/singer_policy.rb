@@ -4,16 +4,12 @@ class SingerPolicy < ApplicationPolicy
 		true
 	end
 
-	def index?
-		true
-	end
-
 	def show?
 		true
 	end
 	
 	def create?
-		if user.nil? 
+		if user.nil?  || !user.admin?
 			false
 		else
 			user.admin?
@@ -21,7 +17,7 @@ class SingerPolicy < ApplicationPolicy
 	end
 
 	def update?
-		if user.nil? 
+		if user.nil?  || !user.admin?
 			false
 		else
 			user.admin?
