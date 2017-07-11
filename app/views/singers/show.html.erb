@@ -34,17 +34,17 @@
 
 <p>
   <strong>Concerts:</strong>
-  <% @singer.concerts.each do |t| %>
-    <td><%= t.concert_year%></td>
-    - 
+  <% @singer.concerts.order(:concert_year).each do |t| %>
+    <td><%= t.concert_year.to_s + '-' + t.name[0..20] %></td>
+    -:- 
   <% end %>
 </p>
 
 <p>
   <strong>Soloist In:</strong>
-  <% @singer.songs.each do |t| %>
+  <% @singer.songs.order(:name).each do |t| %>
     <td><%= t.name%></td>
-    - 
+    -:- 
   <% end %>
 </p>
 

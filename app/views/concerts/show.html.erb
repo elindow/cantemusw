@@ -41,20 +41,20 @@
 </p>
 
 <p>
-  <strong>Songs:</strong>
-  <% @concert.songs.each do |t| %>
-    <td><%= t.name%></td>
-    - 
-  <% end %>
-</p>
-
-<p>
   <strong>Singers:</strong>
     <% @concert.singers.sort_by{|singer| (singer.last_name)}.each do |t| %>
       <td><%= t.first_name[0]+" "+t.last_name%></td>
-      - 
+      -:- 
  
       <% end %>
+</p>
+
+<p>
+  <strong>Songs:</strong>
+  <% @concert.songs.sort_by{|song| (song.name)}.each do |t| %>
+    <td><%= t.name%></td>
+    -:- 
+  <% end %>
 </p>
 
 <%= link_to 'Back', concerts_path, :class => 'btn btn-primary btn-sm active' %>     |   

@@ -44,36 +44,36 @@
   <div class="field">
     <%= f.label :theme %>
     <%= f.text_area :theme %>
-  </div>
-
-  <div class="field">
+     | 
     <%= f.label :notes %>
     <%= f.text_area :notes %>
   </div>
 
-  <div> | Singers | </div>
+  <div><b> | Singers | </b></div>
 
   <div class="field"> 
    <% for singer in Singer.all.order(:last_name) %>
      <% if (true)%>
        <%= check_box_tag "concert[singer_ids][]", singer.id, @concert.singers.include?(singer) %>
-       <%= singer.first_name[0] + ". " + singer.last_name + " - " %>
+       <%= singer.first_name[0] + ". " + singer.last_name %> -:-
      <% end %>
    <%end%>
   </div>
+<p></p>
 
-  <div> | Songs | </div>
-
+  <div><b>  | Songs | </b></div>
   <div class="field">
    <% for song in Song.all.order(:name) %>
      <% if (true)%>
        <%= check_box_tag "concert[song_ids][]", song.id, @concert.songs.include?(song) %>
-       <%= song.name %>
+       <%= song.name[0..15] %> -:-
      <% end %>
    <%end%>
 </div>
+<p></p> 
 
   <div class="actions">
     <%= f.submit 'Save Concert', :class => 'btn btn-success btn-sm active' %>
   </div>
 <% end %>
+<p></p>

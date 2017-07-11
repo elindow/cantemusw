@@ -40,19 +40,18 @@
 </p>
 
 <p>
-  <strong>In Concerts:</strong>
-  <% @song.concerts.each do |t| %>
-    <td><%= t.concert_year%></td>
-    - 
+  <strong>In Concerts: </strong>
+  <% @song.concerts.order(:concert_year).each do |t| %>
+    <td><%= t.concert_year.to_s + '-' + t.name %></td>
+    -:- 
   <% end %>
 </p>
 
 <p>
   <strong>Soloists:</strong>
-  <% @song.singers.sort %>
-  <% @song.singers.each do |t| %>
-    <td><%= t.first_name[0]+" "+t.last_name%></td>
-    - 
+  <% @song.singers.order(:last_name).each do |t| %>
+    <td><%= t.first_name[0]+" "+t.last_name %></td>
+    -:-  
   <% end %>
 </p>
 

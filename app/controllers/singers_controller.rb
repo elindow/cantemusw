@@ -3,6 +3,9 @@ class SingersController < ApplicationController
 
   helper_method :sort_column, :sort_direction
 
+  @column = "last_name"
+  @direction = "asc"
+
   # GET /singers
   # GET /singers.json
   def index
@@ -89,6 +92,7 @@ class SingersController < ApplicationController
     end
 
     def sort_column
+      #puts "CH  #{@column} #{@direction}"
       sortable_columns.include?(params[:column]) ? params[:column] : "last_name"
     end
 

@@ -47,13 +47,13 @@
    <% for concert in Concert.all.order(:concert_year) %>
      <% if (true)%>
        <%= check_box_tag "singer[concert_ids][]", concert.id, @singer.concerts.include?(concert) %>
-       <%= concert.concert_year %>
+       <%= concert.concert_year.to_s + '-' + concert.name[0..20] %>
      <% end %>
    <%end%>
   </div>
+<p></p>
 
   <div> | Soloist In:  </div>
-
   <div class="field">
    <% for song in Song.all.order(:name) %>
      <% if (true)%>
@@ -62,9 +62,10 @@
      <% end %>
      |
    <%end%>
-
+<p></p>
 
   <div class="actions">
     <%= f.submit 'Save Singer', :class => 'btn btn-success btn-sm active' %>
   </div>
 <% end %>
+<p></p>
