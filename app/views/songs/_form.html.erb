@@ -51,6 +51,8 @@
     <%= f.text_area :notes %>
   </div>
 
+   <div>Concerts:  </div>
+
  <div class="field">
    <% for concert in Concert.all.order(:concert_year) %>
      <% if (true)%>
@@ -59,8 +61,23 @@
      <% end %>
      |
    <%end%>
+  </div>
 
- <div> | Soloists:  </div>
+  <div class="field">
+    <% for concert in Concert.all %>
+      <% if !concert.songs.find_by_name(@song.name).nil? %>
+        <% cy = concert.concert_year %>
+        <%= label_tag(:song_order, "Song Order #{cy}: ") %>
+        <% so = Program.find_by_song_id_and_concert_id(concert.songs.find_by_name(@song.name).id,song.concerts.find_by_name(concert.name).id).song_order %>
+        <%= number_field_tag(:Song_Order, value = so, in: 1..30, size: 1 ) %>
+        <%= params[:song_order] %>
+      <% end %>
+    <% end %>
+  </div>
+
+<p></p>
+
+ <div> Soloists:  </div>
 
   <div class="field">
    <% for singer in Singer.all.order(:last_name) %>

@@ -85,7 +85,7 @@ class ConcertsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def concert_params
-      params.require(:concert).permit(:name, :venue, :concertdate, :conductor, :accompanist, :theme, :notes, :concert_year, {:singer_ids => []}, {:song_ids => []}, :sort)
+      params.require(:concert).permit(:name, :venue, :concertdate, :conductor, :accompanist, :theme, :notes, :concert_year, {:singer_ids => []}, {:song_ids => []}, :sort, :song_order)
     end
 
     def sortable_columns

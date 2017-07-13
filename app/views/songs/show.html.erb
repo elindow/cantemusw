@@ -48,6 +48,19 @@
 </p>
 
 <p>
+<% for concert in Concert.all %>
+      <% if !concert.songs.find_by_name(@song.name).nil? %>
+        <% cy = concert.concert_year %>
+        <strong>Song Order 
+        <%= "#{cy}" %>: </strong>
+        
+        <%= Program.find_by_song_id_and_concert_id(concert.songs.find_by_name(@song.name).id,@song.concerts.find_by_name(concert.name).id).song_order %>
+
+      <% end %>
+    <% end %>
+</p>
+
+<p>
   <strong>Soloists:</strong>
   <% @song.singers.sort %>
   <% @song.singers.each do |t| %>
