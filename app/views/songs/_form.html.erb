@@ -67,10 +67,9 @@
     <% for concert in Concert.all %>
       <% if !concert.songs.find_by_name(@song.name).nil? %>
         <% cy = concert.concert_year %>
-        <%= label_tag(:song_order, "Song Order #{cy}: ") %>
-        <% so = Program.find_by_song_id_and_concert_id(concert.songs.find_by_name(@song.name).id,song.concerts.find_by_name(concert.name).id).song_order %>
-        <%= number_field_tag(:Song_Order, value = so, in: 1..30, size: 1 ) %>
-        <%= params[:song_order] %>
+        <%= label_tag("Song Order #{cy}: ") %>
+        <%= number_field_tag(song.programs.find_by_song_id(song.id).song_order, value = song.programs.find_by_song_id(song.id).song_order, in: 1..30, size: 1 ) %>
+        <% puts "Song Order #{song.programs.find_by_song_id(song.id).song_order}" %>
       <% end %>
     <% end %>
   </div>

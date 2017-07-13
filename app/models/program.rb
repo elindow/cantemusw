@@ -5,4 +5,5 @@ class Program < ApplicationRecord
 	#relations
 	belongs_to :concert
 	belongs_to :song
+
 end
