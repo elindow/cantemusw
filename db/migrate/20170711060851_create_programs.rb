@@ -1,6 +1,6 @@
 class CreateConcerts_Songs_tmp < ActiveRecord::Migration[5.0]
   def change
-    create_table :concert_song_tmps do |t|
+    create_table :programs do |t|
       t.references :concert, comment: 'concert id for given song'
       t.references :song, comment: 'song id for given concert'
 
