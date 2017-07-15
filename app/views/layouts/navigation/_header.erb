@@ -1,104 +1,18 @@
 # app/views/layouts/navigation/_header.erb
 <header class="main-header">
   <a class="logo" href="/">
-Cantemus
-</a>
-  <nav class="navbar navbar-static-top" role="navigation">
+    Cantemus
+  </a><nav class="navbar navbar-static-top" role="navigation">
+  <a class="navbar-brand" rel="home" href="#" title="Cantemus Choral Group 2015">
+      <img style="max-width:170px; margin-top: -7px; width: 60%"
+             src='https://s3.amazonaws.com/cantemuswrestore/CantemusNR2015icon.png'/>
+    </a>
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
-        <li class="dropdown messages-menu">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-envelope-o">
-            </i><span class="label label-success">4</span>
-          </a>
-          <ul class="dropdown-menu">
-            <li class="header">
-              You have 4 messages
-            </li>
-            <li>
-              <ul class="menu">
-                <li>
-                  <a href="#"> </a>
-                  <div class="pull-left">
-                    <img class="img-circle" alt="User Image" src="http://placehold.it/160x160"> </img>
-                  </div>
-                  <h4>
-                    Sender Name
-                    <small>
-                    <i class="fa fa-clock-o">
-                    </i>5 mins
-                    </small>
-                  </h4>
-                  <p>
-                    Message Excerpt
-                  </p>
-                </li>
-              </ul>
-            </li>
-            <li class="footer">
-              <a href="#"> See All Messages</a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown notifications-menu">
-<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-bell-o">
-            </i><span class="label label-warning">10</span>
-          </a>
-          <ul class="dropdown-menu">
-            <li class="header">
-              You have 10 notifications
-            </li>
-            <li>
-              <ul class="menu">
-                <li>
-                  <a href="#">
-                <i class="ion ion-ios-people info">
-                </i>Notification title
-                </a>
-                </li>
-              </ul>
-            </li>
-            <li class="footer">
-              <a href="#"> View all</a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown tasks-menu">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-flag-o">
-            </i><span class="label label-danger">9</span>
-            </a>
-          <ul class="dropdown-menu">
-            <li class="header">
-              You have 9 tasks
-            </li>
-            <li>
-              <ul class="menu">
-                <li>
-                  <a href="#">
-                  </a> 
-                  <h3>
-                    Design some buttons
-                  <small class="pull-right">20%</small>
-                  </h3>
-                  <div class="progress xs">
-                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" class="progress-bar progress-bar-aqua" role="progressbar" style="width: 20%">
-<span class="sr-only">20% Complete</span>
-</div>
-                  </div>
-                </li>
-              </ul>
-            </li>
-            <li class="footer">
-              <a href="#"> View all tasks</a>
-            </li>
-          </ul>
-        </li>
         <li class="dropdown user user-menu">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <% if user_signed_in? %>
-              <img alt="User Image" class="user-image" src="http://placehold.it/160x160" />
+              <img alt="User Image" class="user-image" src="https://s3.amazonaws.com/cantemuswrestore/Stafficon.PNG" >
               <span class="hidden-xs"><%= current_user.name %></span>
             <% else %>
               <%= "guest user" %>
@@ -106,22 +20,32 @@ Cantemus
           </a>
           <ul class="dropdown-menu">
             <li class="user-header">
-              <img class="img-circle" alt="User Image" src="http://placehold.it/160x160"> </img>
+              <img class="img-circle" alt="User Image" src="https://s3.amazonaws.com/cantemuswrestore/CantemusNR2015icon.png"> </img>
               <p>
-                Eric Lindow - Tenor
+                <% if user_signed_in? %>
+                  <%= current_user.name %>
+                <% else %>
+                  Guest User
                 <small>Member since Dec. 1993</small>
+                <% end %>
               </p>
             </li>
-            <li class="user-body">
-              <div class="col-xs-4 text-center">
-                <a href="#"> Followers</a>
-              </div>
-              <div class="col-xs-4 text-center">
-                <a href="#"> Sales</a>
-              </div>
-              <div class="col-xs-4 text-center">
-                <a href="#"> Friends</a>
-              </div>
+            <% if user_signed_in? %> 
+              <% u = User.find_by_id(current_user.id) %>
+                <% if u.member %>
+                  <% s = Singer.find_by_email(u.email) %>
+                  <li class="user-body">
+                    <div class="col-xs-4 text-left">
+                      <small> <%= s.voice %></small>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                      <small> <%= s.concerts.count %> Concerts </small>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                      <small> <%= s.songs.count %> Solos </small>
+                    </div>
+                  <% end %>
+              <% end %>
             </li>
             <li class="user-footer">
               <% if user_signed_in? %>            
