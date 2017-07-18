@@ -1,18 +1,41 @@
 # app/views/layouts/navigation/_header.erb
 <header class="main-header">
   <a class="logo" href="/">
-    Cantemus
+    Cantemus Archives
   </a><nav class="navbar navbar-static-top" role="navigation">
   <a class="navbar-brand" rel="home" href="#" title="Cantemus Choral Group 2015">
-      <img style="max-width:170px; margin-top: -7px; width: 60%"
-             src='https://s3.amazonaws.com/cantemuswrestore/CantemusNR2015icon.png'/>
+      <img style="max-width:170px; margin-top: -10px; width: 50%"
+             src='https://s3.amazonaws.com/cantemuswrestore/Stafficon.PNG'/>
     </a>
+
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
+
+    <li class="dropdown messages-menu">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-info">
+            </i><span class="label label-warning"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="header">
+              About Cantemus
+            </li>
+                <li>
+                  This is an archival site for the Cantemus singing 
+                </li>
+                <li>
+                  group of Westchester, New York,
+                </li>
+                <li>
+                  founded in 1988 by Jena Smith.
+                </li>
+          </ul>
+    </li>
+
         <li class="dropdown user user-menu">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <% if user_signed_in? %>
-              <img alt="User Image" class="user-image" src="https://s3.amazonaws.com/cantemuswrestore/Stafficon.PNG" >
+              <img alt="User Image" class="user-image" src="https://s3.amazonaws.com/cantemuswrestore/CantemusNR2015icon.png" >
               <span class="hidden-xs"><%= current_user.name %></span>
             <% else %>
               <%= "guest user" %>

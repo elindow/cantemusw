@@ -65,12 +65,22 @@
 
   <div class="field">
     <% for concert in Concert.all %>
-      <% if !concert.songs.find_by_name(@song.name).nil? %>
-        <% cy = concert.concert_year %>
-        <%= label_tag("Song Order #{cy}: ") %>
-        <%= number_field_tag(song.programs.find_by_song_id(song.id), value = song.programs.find_by_song_id(song.id).song_order, in: 1..30, size: 2 ) %>
-        <% puts "Song Order #{song.programs.find_by_song_id(song.id).song_order}" %>
-      <% end %>
+      <% if !concert.songs.find_by_name(song.name).nil? %>
+        <% so = song.programs.find_by_song_id(song.id).song_order
+            if (so.nil?)
+              song.s_o = 0
+            else
+              song.s_o = so
+            end %>
+        <strong><%= concert.concert_year %></strong>
+        <%= f.label( " Song Order: " ) %>
+        <%= f.number_field :s_o, in: 0..30, size: 3 %>
+        <% sid = concert.songs.find_by_name(song.name).id %>
+        <% @program = Program.find_by_song_id(sid) %>
+        <% @program.song_order = song[:s_o] %> 
+        <%= puts "Song Order #{sid} #{song.name} #{song[:s_o]}" %>
+        <% @program.save %>
+       <% end %>
     <% end %>
   </div>
 
@@ -88,7 +98,7 @@
    <%end%>
 <p></p>
 
-  <div class="actions">
+   <div class="actions">
     <%= f.submit 'Save Song', :class => 'btn btn-success btn-sm active' %>
   </div>
 

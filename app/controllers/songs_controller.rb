@@ -28,6 +28,7 @@ class SongsController < ApplicationController
   # GET /songs/1/edit
   def edit
     authorize @song
+    @song.s_o = 0
   end
 
   # POST /songs
@@ -81,7 +82,7 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:name, :source, :composer, :lyricist, :arranger, :genre, :song_type, :notes, {:singer_ids => []}, {:concert_ids => []})
+      params.require(:song).permit(:name, :source, :composer, :lyricist, :arranger, :genre, :song_type, :notes, {:singer_ids => []}, {:concert_ids => []}, :s_o, programs_attributes: [ :song_order ] )
     end
 
     def sortable_columns

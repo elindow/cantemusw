@@ -1,23 +1,12 @@
 # app/views/layouts/navigation/_sidebar.erb
 <div class="main-sidebar">
   <div class="sidebar" >
+    <div class="pull-left image">
+       <img alt="User Image" class="user-image" src="https://s3.amazonaws.com/cantemuswrestore/CantemusNR2015icon.png" style= "width: 140%">
+     </div>
+
     <div class="user-panel">
-      <div class="pull-left image">
-        
-      </div>
-      <div class="pull-left info">
-        <p>
-          <% if user_signed_in? %>
-              <span class="hidden-xs"><%= current_user.name %></span>
-            <% else %>
-              Not signed in
-            <% end %>
-        </p>
-        <a href="#">
-          <i class="fa fa-circle text-success">
-          </i>Online
-          </a>
-      </div>
+
     </div>
     <form action="#" class="sidebar-form" method="get">
       <div class="input-group">
@@ -30,9 +19,7 @@
     </form>
     <ul class="sidebar-menu">
       <li class="sidebar-text">
-        <p>Archival site for the Cantemus singing </p>
-        <p> group of Westchester, New York, </p>
-        <p> founded in 1988 by Jena Smith.</p>
+        
        </li>
       <li class="active">
         <a href="#">

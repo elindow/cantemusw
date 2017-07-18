@@ -51,7 +51,8 @@
 
 <p>
   <strong>Songs:</strong>
-  <% @concert.songs.sort_by{|song| (song.name)}.each do |t| %>
+    <% @concert.songs.sort_by{|song| (song.name)}.each do |t| %>
+    <%# @concert.songs.sort_by{|song| (Program.find_by_song_id(song.id).song_order)}.each do |t| %>
     <td><%= t.name%></td>
     -:- 
   <% end %>
