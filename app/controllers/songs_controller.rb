@@ -28,7 +28,6 @@ class SongsController < ApplicationController
   # GET /songs/1/edit
   def edit
     authorize @song
-    @song.s_o = 0
   end
 
   # POST /songs
@@ -52,10 +51,23 @@ class SongsController < ApplicationController
   # PATCH/PUT /songs/1.json
   def update
     authorize @song
-    respond_to do |format|
+            
+     respond_to do |format|
       if @song.update(song_params)
         format.html { redirect_to @song, notice: 'Song was successfully updated.' }
         format.json { render :show, status: :ok, location: @song }
+        songs = Song.all
+        for concert in Concert.all
+          if !concert.songs.find_by_name(@song.name).nil?
+            sid = concert.songs.find_by_name(@song.name).id   # get id of song in this concert
+            @program = Program.find_by_song_id(sid)           # create program instance
+            @program.nil?
+            @program.song_order = @song[:s_o]                  # update value
+            puts "Song Order #{sid} #{@song.name} #{@song[:s_o]}"
+            @program.save      
+          end                               # save it
+        end     
+
       else
         format.html { render :edit }
         format.json { render json: @song.errors, status: :unprocessable_entity }
