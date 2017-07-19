@@ -21,6 +21,7 @@ class ConcertsController < ApplicationController
   # GET /concerts/1.json
   def show
     authorize Concert
+    @song_sort = true
   end
 
   # GET /concerts/new

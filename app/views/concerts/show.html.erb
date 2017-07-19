@@ -50,12 +50,27 @@
 </p>
 
 <p>
-  <strong>Songs:</strong>
-    <%# @concert.songs.sort_by{|song| (song.name)}.each do |t| %>
-    <% @concert.songs.sort_by{|song| (Program.find_by_song_id(song.id).song_order)}.each do |t| %>
-    <td><%= t.name%></td>
-    -:- 
-  <% end %>
+  <strong>Songs Sorted by </strong>
+
+      <% Program.where(concert_id: [@concert.id]).each do |so| %>
+        <% if so.song_order.nil? 
+            @song_sort = false 
+          end %>
+      <% end %>
+
+      <% if !@song_sort %>
+          <strong> Name: </strong>          
+          <% @concert.songs.sort_by{|song| (song.name)}.each do |t| %>
+          <td><%= t.name%></td>
+          -:- 
+      <% end %>
+      <% else %>
+          <strong> Program Order: </strong>
+          <% @concert.songs.sort_by{|song| (Program.find_by_song_id(song.id).song_order) || 1}.each do |t| %>
+          <td><%= t.name%></td>
+          -:- 
+        <% end %>
+    <% end %>
 </p>
 
 <%= link_to 'Back', concerts_path, :class => 'btn btn-primary btn-sm active' %>     |   
