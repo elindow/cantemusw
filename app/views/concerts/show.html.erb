@@ -80,7 +80,15 @@
 <% end %>
 
 <% if policy(Concert).create? %>
-  <%= link_to 'New Concert', new_concert_path, :class => 'btn btn-success btn-sm active' %>
+  <%= link_to 'New Concert', new_concert_path, :class => 'btn btn-success btn-sm active' %> |
+<% end %>
+
+<% if policy(Singer).create? %>
+  <%= link_to 'New Singer', new_singer_path, :class => 'btn btn-success btn-sm active' %> |
+<% end %>
+
+<% if policy(Song).create? %>
+  <%= link_to 'New Song', new_song_path, :class => 'btn btn-success btn-sm active' %> |
 <% end %>
 
 <% if false %>

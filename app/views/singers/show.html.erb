@@ -50,7 +50,8 @@
 
 <%= link_to 'Back', singers_path, :class => 'btn btn-primary btn-sm active' %>     |   
 
-<% if policy(Singer).update? %>
+<% if policy(Singer).update? || current_user.email == @singer.email %>
+  <%=  puts "singer email #{@singer[:email]} user emails #{current_user.email}" %>
   <%= link_to 'Edit', edit_singer_path(@singer), :class => 'btn btn-warning btn-sm active' %> |
 <% end %>
 

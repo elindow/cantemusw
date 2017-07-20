@@ -3,6 +3,8 @@
 
   include Pundit
   after_action :verify_authorized
+  after_action :verify_policy_scoped
+  
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from Pundit::AuthorizationNotPerformedError, with: :user_not_authorized
 

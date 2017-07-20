@@ -30,7 +30,9 @@ class SingersController < ApplicationController
 
   # GET /singers/1/edit
   def edit
-    authorize Singer
+    skip_authorization
+    @singers = policy_scope(Singer)
+
   end
 
   # POST /singers
@@ -53,7 +55,8 @@ class SingersController < ApplicationController
   # PATCH/PUT /singers/1
   # PATCH/PUT /singers/1.json
   def update
-    authorize @singer
+    #authorize @singer
+    skip_authorization
     respond_to do |format|
       if @singer.update(singer_params)
         format.html { redirect_to @singer, notice: 'Singer was successfully updated.' }

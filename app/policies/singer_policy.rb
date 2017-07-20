@@ -17,10 +17,10 @@ class SingerPolicy < ApplicationPolicy
 	end
 
 	def update?
-		if user.nil?  || !user.admin?
+		if user.nil? 
 			false
 		else
-			user.admin?
+			user.admin? 
 		end
 	end
 
@@ -30,7 +30,11 @@ class SingerPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
+    	if user.admin?
+    		scope.all
+    	else user.member?
+    		scope.where("id = ?", 66)
+      	end
     end
   end
 end
