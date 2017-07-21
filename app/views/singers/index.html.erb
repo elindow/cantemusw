@@ -25,6 +25,7 @@
       <th><%= sort_link "voice" %></th>
       <th>Joined</th>
       <th>Left</th>
+      <th>Notes</th>
       <th><%= link_to 'Concerts', concerts_path %></th>
       <th><%= link_to 'Solos', songs_path %></th>
  
@@ -44,6 +45,7 @@
         <td><%= singer.voice %></td>
         <td><%= singer.join_year %></td>
         <td><%= singer.left_year %></td>
+        <td><%= singer.notes %></td>
         <td><%= singer.concerts.count %></td>
         <td><%= singer.songs.count %></td>
         <% if false %><td><%= link_to 'Show', singer %></td><% end %>

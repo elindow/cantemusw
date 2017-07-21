@@ -24,6 +24,7 @@
       <th><%= sort_link "concertdate", "Date" %></th>
       <th><%= "Conductor" %></th>
       <th><%= "Accompanist" %></th>
+      <th><%= "Narrators" %></th>
       <th><%= "Theme" %></th>
       <th><%= "Notes" %></th>
       <th><%= link_to 'Songs', songs_path %></th>
@@ -43,6 +44,7 @@
         <td><%= concert.concertdate.strftime("%m/%d/%y") %></td>
         <td><%= concert.conductor %></td>
         <td><%= concert.accompanist %></td>
+        <td><%= concert.narrators %></td>
         <td><%= concert.theme %></td>
         <td><%= concert.notes %></td>
         <td><%= concert.songs.count %></td>

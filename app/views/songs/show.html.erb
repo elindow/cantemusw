@@ -51,9 +51,10 @@
 <% for concert in Concert.all %>
       <% if !concert.songs.find_by_name(@song.name).nil? %>
         <% cy = concert.concert_year %>
+        <% cid = concert.id %>
         <strong>Song Order 
         <%= "#{cy}" %>: </strong>
-        <%= @song.programs.find_by_song_id(@song.id).song_order %>
+        <%= Program.find_by_song_id_and_concert_id(@song.id,cid).song_order %> -:-
       <% end %>
     <% end %>
 </p>
