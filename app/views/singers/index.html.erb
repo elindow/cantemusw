@@ -19,7 +19,7 @@
     <tr>
       <th><%= sort_link "last_name", "Last Name" %></th>
       <th><%= sort_link "first_name", "First Name" %></th>
-      <% if policy(Singer).update?  || current_user.member? %>
+      <% if policy(Singer).update?  || (user_signed_in? && current_user.member?) %>
         <th><%= sort_link "email" %></th>
       <% end %>
       <th><%= sort_link "voice" %></th>
@@ -39,7 +39,7 @@
       <tr>
         <td><%= link_to "#{singer.last_name}", singer %></td>
         <td><%= singer.first_name %></td>
-        <% if policy(singer).update? || current_user.member? %>
+        <% if policy(singer).update? || (user_signed_in? && current_user.member?) %>
           <td><%= singer.email %></td>
         <% end %>  
         <td><%= singer.voice %></td>
