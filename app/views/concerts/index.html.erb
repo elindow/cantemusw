@@ -25,8 +25,8 @@
       <th><%= "Conductor" %></th>
       <th><%= "Accompanist" %></th>
       <th><%= "Narrators" %></th>
-      <th><%= "Theme" %></th>
-      <th><%= "Notes" %></th>
+      <th style="width:5em"><%= "Theme" %></th>
+      <th style="width:5em"><%= "Notes" %></th>
       <th><%= link_to 'Songs', songs_path %></th>
       <th><%= link_to 'Singers', singers_path %></th>
       
@@ -45,8 +45,14 @@
         <td><%= concert.conductor %></td>
         <td><%= concert.accompanist %></td>
         <td><%= concert.narrators %></td>
-        <td><%= concert.theme %></td>
-        <td><%= concert.notes %></td>
+        <td><%= concert.theme[0..5] %>
+          <% if concert.theme.length > 5 %>
+            <%= '..'  %>
+          <% end %></td>
+        <td><%= concert.notes[0..5] %>
+            <% if concert.notes.length > 5 %>
+            <%= '..'  %>
+          <% end %></td>
         <td><%= concert.songs.count %></td>
         <td><%= concert.singers.count %></td>
         <% if false %> <td><%= link_to 'Show', concert, :class => 'btn btn-success btn-sm active'  %></td><% end %>

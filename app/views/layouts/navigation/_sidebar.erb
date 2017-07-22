@@ -28,12 +28,12 @@
       </li>
       <li>
         <a href="#">
-        <span><%= link_to 'Singers', singers_path %></span>
+        <span><%= link_to 'Singers', singers_path, :style=> 'color: blue; font-weight: bold' %></span>
         </a>
       </li>
       <li>
         <a href="#">
-        <span><%= link_to 'Songs', songs_path %></span>
+        <span><%= link_to 'Songs', songs_path, :style=> 'color: blue; font-weight: bold' %></span>
         </a>
       </li>
       <li class="treeview">
@@ -51,7 +51,9 @@
             </li>
             <li>
               <%# sign_out :current_user %>
+              <% if false %>
               <a href="#"><%= link_to 'New Sign In', new_user_session_path %></a>
+              <% end %>
             </li>
           <% else %>
           <li>
