@@ -44,6 +44,7 @@
   <div class = "field">
     <%= f.label :image %>
     <%= f.file_field :image %>
+    Note: Maximum image size is 2 megabytes
   </div>
   <% if @singer.image_data? %>
     <div class = "field">
@@ -54,7 +55,7 @@
     </div>
   <% end %>
 
-  <div> | Concerts: </div>
+  <div> | Concerts Appeared In: </div>
 
   <div class="field"> 
    <% for concert in Concert.all.order(:concert_year) %>

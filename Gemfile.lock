@@ -80,6 +80,7 @@ GEM
     fastimage (2.1.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    hirb (0.7.3)
     i18n (0.8.4)
     image_processing (0.4.4)
     jbuilder (2.7.0)
@@ -212,6 +213,7 @@ DEPENDENCIES
   coffee-script-source (= 1.8.0)
   devise
   fastimage
+  hirb
   image_processing
   jbuilder (~> 2.5)
   jquery-rails

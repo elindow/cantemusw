@@ -17,12 +17,12 @@ class ImageUploader < Shrine
 
   def process(io, context)
     if context[:phase] == :store
-      size_700 = resize_to_limit!(io.download, 700,700)
-      size_500 = resize_to_limit(size_700, 500,500)
-      size_300 = resize_to_limit(size_500, 300,300)
-      thumb = resize_to_limit(size_300, 200, 200)
-      size_100 = resize_to_limit(thumb, 100, 100)
-      { original: io, large: size_700, medium: size_500, small: size_300, thumb: thumb, tiny: size_100 }
+      size_500 = resize_to_limit!(io.download, 500,500)
+      #size_500 = resize_to_limit(size_700, 500,500)
+      #size_300 = resize_to_limit(size_500, 300,300)
+      size_150 = resize_to_limit(size_500, 150, 150)
+      thumb = resize_to_limit(size_150, 75, 75)
+      { original: io, medium: size_500, small: size_150, thumb: thumb }
     end
   end
 end
