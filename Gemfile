@@ -47,6 +47,13 @@ gem 'pundit'
 #for heroku mail sending
 gem 'sendgrid-ruby'
 
+gem 'aws-sdk'
+gem 'mimemagic'
+gem 'fastimage'
+gem 'image_processing'
+gem 'mini_magick'
+gem 'shrine'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

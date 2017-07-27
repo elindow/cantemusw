@@ -47,6 +47,14 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (7.1.1.2)
       execjs
+    aws-sdk (2.10.17)
+      aws-sdk-resources (= 2.10.17)
+    aws-sdk-core (2.10.17)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.10.17)
+      aws-sdk-core (= 2.10.17)
+    aws-sigv4 (1.0.1)
     bindex (0.5.0)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
@@ -66,14 +74,18 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    down (4.0.1)
     erubis (2.7.0)
     execjs (2.7.0)
+    fastimage (2.1.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     i18n (0.8.4)
+    image_processing (0.4.4)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    jmespath (1.3.1)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -86,6 +98,8 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mimemagic (0.3.2)
+    mini_magick (4.8.0)
     mini_portile2 (2.2.0)
     minitest (5.10.2)
     multi_json (1.12.1)
@@ -149,6 +163,8 @@ GEM
     sendgrid-ruby (5.0.0)
       ruby_http_client (~> 3.0)
       sinatra (>= 1.4.7, < 3)
+    shrine (2.6.1)
+      down (>= 2.3.6)
     sinatra (2.0.0)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -188,14 +204,19 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  aws-sdk
   bcrypt!
   bootstrap-sass
   byebug
   coffee-rails (~> 4.2)
   coffee-script-source (= 1.8.0)
   devise
+  fastimage
+  image_processing
   jbuilder (~> 2.5)
   jquery-rails
+  mimemagic
+  mini_magick
   pg
   puma (~> 3.0)
   pundit
@@ -203,6 +224,7 @@ DEPENDENCIES
   ransack
   sass-rails (~> 5.0)
   sendgrid-ruby
+  shrine
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)

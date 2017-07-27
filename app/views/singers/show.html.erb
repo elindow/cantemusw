@@ -38,6 +38,13 @@
 </p>
 
 <p>
+  <strong>Image:</strong>
+  <% if @singer.image_data? %>
+    <%= image_tag @singer.image_url(:tiny) %>
+  <% end %>
+</p>
+
+<p>
   <strong>Concerts:</strong>
   <% @singer.concerts.order(:concert_year).each do |t| %>
     <td><%= t.concert_year.to_s + '-' + t.name[0..20] %></td>

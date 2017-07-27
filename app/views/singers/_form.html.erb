@@ -41,6 +41,19 @@
     <%= f.text_area :notes %>
   </div>
 
+  <div class = "field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+  <% if @singer.image_data? %>
+    <div class = "field">
+    <%= image_tag @singer.image_url(:thumb) %>
+    </div>
+    <div class = "field">
+      Remove attachment: <%= f.check_box :remove_image %>
+    </div>
+  <% end %>
+
   <div> | Concerts: </div>
 
   <div class="field"> 
