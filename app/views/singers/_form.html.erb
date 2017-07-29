@@ -12,37 +12,36 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :last_name %>
+    <%= f.label :last_name %>:
     <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :first_name %>
+    -:-
+    <%= f.label :first_name %>:
     <%= f.text_field :first_name %>
   </div>
 
   <div class="field">
-    <%= f.label :email %>
+    <%= f.label :email %>:
     <%= f.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :voice %>
+    -:-
+    <%= f.label :voice %>:
     <%= f.text_field :voice %>
   </div>
 
   <div class="field">
-    <%= f.label :joinYear %>
+    <%= f.label :joinYear %>:
+    <%= f.number_field :join_year %>
+    -:-
+    <%= f.label :leftYear %>:
     <%= f.number_field :join_year %>
   </div>
 
   <div class="field">
-    <%= f.label :notes %>
+    <%= f.label :notes %>:
     <%= f.text_area :notes %>
   </div>
 
   <div class = "field">
-    <%= f.label :image %>
+    <%= f.label :image, :style => "inline" %>:
     <%= f.file_field :image %>
     Note: Maximum image size is 2 megabytes
   </div>
@@ -55,7 +54,21 @@
     </div>
   <% end %>
 
-  <div> | Concerts Appeared In: </div>
+  <div class = "field">
+    <%= f.label :photo, :style => "inline" %>:
+    <%= f.file_field :photo %>
+    Note: Maximum image size is 2 megabytes
+  </div>
+  <% if @singer.photo_data? %>
+    <div class = "field">
+    <%= image_tag @singer.photo_url(:thumb) %>
+    </div>
+    <div class = "field">
+      Remove attachment: <%= f.check_box :remove_photo %>
+    </div>
+  <% end %>
+
+<div><strong> Concerts Appeared In: </strong></div>
 
   <div class="field"> 
    <% for concert in Concert.all.order(:concert_year) %>
@@ -67,7 +80,7 @@
   </div>
 <p></p>
 
-  <div> | Soloist In:  </div>
+  <div><strong> Soloist In:  </strong></div>
   <div class="field">
    <% for song in Song.all.order(:name) %>
      <% if (true)%>

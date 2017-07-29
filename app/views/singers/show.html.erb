@@ -41,10 +41,22 @@
 </p>
 
 <p>
-  <strong>Concerts:</strong>
-  <% @singer.concerts.order(:concert_year).each do |t| %>
-    <td><%= t.concert_year.to_s + '-' + t.name[0..20] %></td>
-    -:- 
+  <strong>Photo2:</strong>
+  <% if @singer.photo_data? %>
+    <%= image_tag @singer.photo_url(:thumb) %> 
+  </p><p>
+    <%= link_to 'Click here for original (full size) photo', @singer.photo_url(:original) %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Concerts:</strong><br />
+  <% @singer.concerts.order(:concert_year).in_groups_of(8,false) do |concrts| %>
+    <% for concert in concrts %>
+      <td><%= concert.concert_year.to_s + '-' + concert.name[0..20] %></td>
+      -:- 
+    <% end %>
+    <br />
   <% end %>
 </p>
 

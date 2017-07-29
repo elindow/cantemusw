@@ -87,7 +87,7 @@ class SingersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def singer_params
-      params.require(:singer).permit( :image, :image_data, :remove_image, :last_name, :first_name, :email, :voice, :joined, :left, :join_year, :left_year, :notes, {:concert_ids => []}, {:song_ids => []})
+      params.require(:singer).permit( :photo, :remove_photo, :image, :remove_image, :last_name, :first_name, :email, :voice, :joined, :left, :join_year, :left_year, :notes, {:concert_ids => []}, {:song_ids => []})
     end
 
     def sortable_columns

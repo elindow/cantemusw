@@ -2,7 +2,7 @@ class PhotoUploader < Shrine
   include ImageProcessing::MiniMagick
 
   plugin :activerecord
-  plugin :determine_mime_type
+  plugin :determine_mime_type, analyzer: :mimemagic
   plugin :logging, logger: Rails.logger
   plugin :remove_attachment
   plugin :store_dimensions
@@ -17,7 +17,7 @@ class PhotoUploader < Shrine
   def process(io, context)
     case context[:phase]
     when :store
-      thumb = resize_to_limit!(io.download, 200, 200)
+      thumb = resize_to_limit!(io.download, 75, 75)
       { original: io, thumb: thumb }
     end
   end
