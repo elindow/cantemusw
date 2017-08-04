@@ -1,0 +1,87 @@
+<h3> Pictures </h3>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @picture.caption %>
+</p>
+
+<p>
+  <strong>Picture Date:</strong>
+  <%= @picture.picture_date %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @picture.notes %>
+</p>
+
+<p>
+  <strong>Original Name:</strong>
+  <%= @picture.picture[:original].original_filename %> -:-
+  <strong>Size:</strong>
+  <%= number_with_delimiter(@picture.picture[:original].size) %> kb -:-
+  <strong>Height:</strong>
+  <%= @picture.picture[:original].height %> pixels -:-
+  <strong>Width:</strong>
+  <%= @picture.picture[:original].width %> pixels
+</p>
+
+<p>
+<strong>ID:</strong>
+<%= @picture.picture[:original].id %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <% if @picture.picture_data? %>
+    <%= image_tag @picture.picture_url(:medium) %> 
+  </p><p>
+    <%= link_to 'Click here for original (full size) photo', @picture.picture_url(:original) %>
+  <% end %>
+</p>
+
+<% if false %>
+<p>
+  <strong>In Concerts: </strong>
+  <% @picture.concerts.order(:concert_year).each do |t| %>
+    <td><%= t.concert_year.to_s + '-' + t.name %></td>
+    -:- 
+  <% end %>
+</p>
+
+<p>
+<% for concert in Concert.all %>
+      <% if !concert.pictures.find_by_name(@picture.name).nil? %>
+        <% cy = concert.concert_year %>
+        <% cid = concert.id %>
+        <strong>picture Order 
+        <%= "#{cy}" %>: </strong>
+        <%= Program.find_by_picture_id_and_concert_id(@picture.id,cid).picture_order %> -:-
+      <% end %>
+    <% end %>
+</p>
+
+<p>
+  <strong>Soloists:</strong>
+  <% @picture.singers.order(:last_name).each do |t| %>
+    <td><%= t.first_name[0]+" "+t.last_name %></td>
+    -:-  
+  <% end %>
+</p>
+<% end %>
+
+<%= link_to 'Back', pictures_path, :class => 'btn btn-primary btn-sm active' %>     |   
+
+<% if policy(Picture).update? %>
+  <%= link_to 'Edit', edit_picture_path(@picture), :class => 'btn btn-warning btn-sm active' %> |
+<% end %>
+
+<% if policy(Picture).create? %>
+  <%= link_to 'New picture', new_picture_path, :class => 'btn btn-success btn-sm active' %>
+<% end %>
+
+<% if false %>
+<%= link_to 'Edit', edit_picture_path(@picture) %> |
+<%= link_to 'Back', pictures_path %> |
+<%= link_to 'Add New picture', new_picture_path %>
+<% end %>

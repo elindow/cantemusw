@@ -1,0 +1,92 @@
+<%= form_for(picture) do |f| %>
+  <% if picture.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(picture.errors.count, "error") %> prohibited this picture from being saved:</h2>
+
+      <ul>
+      <% picture.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :caption %>
+    <%= f.text_field :caption %>
+  </div>
+
+  <div class="field">
+    <%= f.label :picture_date %>
+    <%= f.date_field :picture_date %>
+  </div>
+
+   <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
+  </div>
+
+  <div class = "field">
+    <%= f.label :picture, :style => "inline" %>:
+    <%= f.file_field :picture %>
+    Note: Maximum image size is 4 megabytes
+  </div>
+  <% if @picture.picture_data? %>
+    <div class = "field">
+    <%= image_tag @picture.picture_url(:thumb) %>
+    </div>
+    <div class = "field">
+      Remove attachment: <%= f.check_box :remove_picture %>
+    </div>
+  <% end %>
+
+<%if false %>
+  <div><strong>Concerts: </strong></div>
+
+ <div class="field">
+   <% for concert in Concert.all.order(:concert_year) %>
+     <% if (true)%>
+       <%= check_box_tag "picture[concert_ids][]", concert.id, @picture.concerts.include?(concert) %>
+       <%= concert.concert_year.to_s + '-' + concert.name[0..20] %>
+     <% end %>
+     |
+   <%end%>
+  </div>
+
+  <div class="field">
+    <% for concert in Concert.all %>
+      <% if !concert.pictures.find_by_name(picture.name).nil? %>
+        <% so = picture.programs.find_by_picture_id(picture.id).picture_order
+            if (so.nil?)
+              picture.s_o = 0
+            else
+              picture.s_o = so
+            end %>
+        <strong><%= concert.concert_year %></strong>
+        <%= f.label( " picture Order: " ) %>
+        <%= f.number_field :s_o, in: 0..30, size: 3 %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <p></p>
+
+  <div><strong> Soloists:  </strong></div>
+
+  <div class="field">
+   <% for singer in Singer.all.order(:last_name) %>
+     <% if (true)%>
+       <%= check_box_tag "picture[singer_ids][]", singer.id, @picture.singers.include?(singer) %>
+       <%= singer.first_name[0] + " " + singer.last_name %>
+     <% end %>
+     |
+   <%end%>
+<p></p>
+<% end %>
+
+   <div class="actions">
+    <%= f.submit 'Save picture', :class => 'btn btn-success btn-sm active' %>
+  </div>
+
+<% end %>
+<p></p>
