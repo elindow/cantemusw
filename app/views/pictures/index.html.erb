@@ -40,24 +40,27 @@
     <% @pictures.each do |picture| %>
       <tr>
         <td>
-          <% if !picture.picture[:thumb].nil? %>
-            <%= image_tag picture.picture_url(:thumb) %> 
+          <% if picture.picture_data %>
+            <% if !picture.picture[:thumb].nil? %>
+              <%= image_tag picture.picture_url(:thumb) %> 
+            <% end %>
+            </td>
+            <td><%= link_to "#{picture.caption[0..20]}", picture %></td>
+            <td><%= picture.picture_date %></td>
+            <td><%= picture.submitted_by %></td>
+            <td><%= picture.notes[0..15] %></td>
+            <% !picture.picture[:original].nil? %>
+              <td><%= picture.picture[:original].original_filename %></td>
+              <td><%= number_with_delimiter(picture.picture[:original].size) %> kb</td> 
+              <td><%= picture.picture[:original].height %></td>
+              <td><%= picture.picture[:original].width %></td>
+            < % end %>
           <% end %>
-        </td>
-        <td><%= link_to "#{picture.caption[0..20]}", picture %></td>
-        <td><%= picture.picture_date %></td>
-        <td><%= picture.submitted_by %></td>
-        <td><%= picture.notes[0..15] %></td>
-        <% if !picture.picture[:original].nil? %>
-          <td><%= picture.picture[:original].original_filename %></td>
-          <td><%= number_with_delimiter(picture.picture[:original].size) %> kb</td> 
-          <td><%= picture.picture[:original].height %></td>
-          <td><%= picture.picture[:original].width %></td>
-         <% end %>
-
-        <% if false %><td><%= link_to 'Show', song %></td><% end %>
-        <% if policy(picture).update? %>
-          <td><%= picture.picture[:original].id %></td>
+          <% if false %><td><%= link_to 'Show', song %></td><% end %>
+          <% if policy(picture).update? %>
+            <% if picture.picture_data && !picture.picture[:thumb].nil? %>
+              <td><%= picture.picture[:original].id %></td>
+            <% end %>
           <td><%= link_to 'Edit', edit_picture_path(picture), :class => 'btn btn-success btn-sm active' %></td>
           <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-sm active' %></td>
         <% end %>
