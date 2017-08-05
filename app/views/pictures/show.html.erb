@@ -17,30 +17,31 @@
   <%= @picture.notes %>
 </p>
 
-<p>
-  <strong>Original Name:</strong>
-  <%= @picture.picture[:original].original_filename %> -:-
-  <strong>Size:</strong>
-  <%= number_with_delimiter(@picture.picture[:original].size) %> kb -:-
-  <strong>Height:</strong>
-  <%= @picture.picture[:original].height %> pixels -:-
-  <strong>Width:</strong>
-  <%= @picture.picture[:original].width %> pixels
-</p>
+<% if !@picture.picture[:original].nil? %>
+  <p>
+    <strong>Original Name:</strong>
+    <%= @picture.picture[:original].original_filename %> -:-
+    <strong>Size:</strong>
+   <%= number_with_delimiter(@picture.picture[:original].size) %> kb -:-
+    <strong>Height:</strong>
+    <%= @picture.picture[:original].height %> pixels -:-
+   <strong>Width:</strong>
+    <%= @picture.picture[:original].width %> pixels
+  </p>
 
-<p>
-<strong>ID:</strong>
-<%= @picture.picture[:original].id %>
-</p>
+  <p>
+    <strong>ID:</strong>
+    <%= @picture.picture[:original].id %>
+  </p>
 
-<p>
-  <strong>Picture:</strong>
-  <% if @picture.picture_data? %>
-    <%= image_tag @picture.picture_url(:medium) %> 
-  </p><p>
-    <%= link_to 'Click here for original (full size) photo', @picture.picture_url(:original) %>
-  <% end %>
-</p>
+  <p>
+    <% if !@picture.picture[:medium].nil? %>
+      <%= image_tag @picture.picture_url(:medium) %> 
+    </p><p>
+      <%= link_to 'Click here for original (full size) photo', @picture.picture_url(:original) %>
+    <% end %>
+  </p>
+<% end %>
 
 <% if false %>
 <p>

@@ -38,7 +38,9 @@
   </div>
   <% if @picture.picture_data? %>
     <div class = "field">
-    <%= image_tag @picture.picture_url(:thumb) %>
+      <% if !@picture.picture[:thumb].nil? %>
+        <%= image_tag @picture.picture_url(:thumb) %>
+      <% end %>
     </div>
     <div class = "field">
       Remove attachment: <%= f.check_box :remove_picture %>

@@ -41,13 +41,16 @@
   </div>
 
   <div class = "field">
-    <%= f.label :image, :style => "inline" %>:
-    <%= f.file_field :image %>
-    Note: Maximum image size is 2 megabytes
+    <%= f.label :image, "Photo1", :style => "inline" %>: <small><i>(Note: Maximum photo size is 2 megabytes)</i></small>
+    <%= f.file_field :image %> 
   </div>
   <% if @singer.image_data? %>
     <div class = "field">
-    <%= image_tag @singer.image_url(:thumb) %>
+      <% if !@singer.image[:thumb].nil? %>
+        <%= image_tag @singer.image_url(:thumb) %>
+      <% end %>
+      <%= f.label :photo1_caption, "Photo1 Caption:" %>
+      <%= f.text_field :photo1_caption, :size => 40 %>
     </div>
     <div class = "field">
       Remove attachment: <%= f.check_box :remove_image %>
@@ -55,13 +58,16 @@
   <% end %>
 
   <div class = "field">
-    <%= f.label :photo, :style => "inline" %>:
+    <%= f.label :photo, "Photo2", :style => "inline" %>: <small><i>(Note: Maximum photo size is 2 megabytes)</i></small>
     <%= f.file_field :photo %>
-    Note: Maximum image size is 2 megabytes
   </div>
   <% if @singer.photo_data? %>
     <div class = "field">
-    <%= image_tag @singer.photo_url(:thumb) %>
+      <% if !@singer.photo[:thumb].nil? %>
+        <%= image_tag @singer.photo_url(:thumb) %>
+      <% end %>
+        <%= f.label :photo2_caption, "Photo2 Caption:" %>
+        <%= f.text_field :photo2_caption, :size => 40 %>
     </div>
     <div class = "field">
       Remove attachment: <%= f.check_box :remove_photo %>

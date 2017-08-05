@@ -3,7 +3,9 @@
 <p>
   <strong>Name:</strong>
   <%= @singer.first_name %>
-  <%= @singer.last_name %>
+  <%= @singer.last_name %> -:-
+  <strong>Voice:</strong>
+  <%= @singer.voice %>
 </p>
 
 <% if policy(Singer).update? %>
@@ -12,11 +14,6 @@
     <%= @singer.email %>
   </p>
 <% end %>
-
-<p>
-  <strong>Voice:</strong>
-  <%= @singer.voice %>
-</p>
 
 <p>
   <strong>Joined:</strong>
@@ -32,19 +29,37 @@
 </p>
 
 <p>
-  <strong>Photo:</strong>
-  <% if @singer.image_data? %>
+  <strong>Photo1: </strong>
+  <% if !@singer.image[:original].nil? %>
+    <strong>Original Filename: </strong> <%= @singer.image[:original].original_filename %> -:-
+    <strong>Size: </strong> <%= number_with_delimiter(@singer.image[:original].size) %> kb -:-
+    <strong>Height: </strong> <%= @singer.image[:original].height %> -:-
+    <strong>Width: </strong> <%= @singer.image[:original].width %> -:-
+    <strong>ID: </strong> <%= @singer.image[:original].id %>
+  <% end %>
+</p><p>
+  <% if !@singer.image[:small].nil? %>
     <%= image_tag @singer.image_url(:small) %> 
-  </p><p>
+ </p><p>
+    <%= @singer.photo1_caption %> -:->
     <%= link_to 'Click here for original (full size) photo', @singer.image_url(:original) %>
   <% end %>
 </p>
 
 <p>
-  <strong>Photo2:</strong>
-  <% if @singer.photo_data? %>
+  <strong>Photo2: </strong>
+  <% if !@singer.photo[:original].nil? %>
+    <strong>Original Filename: </strong> <%= @singer.photo[:original].original_filename %> -:-
+    <strong>Size: </strong> <%= number_with_delimiter(@singer.photo[:original].size) %> kb -:-
+    <strong>Height: </strong> <%= @singer.photo[:original].height %> -:-
+    <strong>Width: </strong> <%= @singer.photo[:original].width %> -:-
+    <strong>ID: </strong> <%= @singer.photo[:original].id %>
+  <% end %>
+  </p><p>
+  <% if !@singer.photo[:thumb].nil? %>
     <%= image_tag @singer.photo_url(:thumb) %> 
   </p><p>
+    <%= @singer.photo2_caption %> -:->
     <%= link_to 'Click here for original (full size) photo', @singer.photo_url(:original) %>
   <% end %>
 </p>
