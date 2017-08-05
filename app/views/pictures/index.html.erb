@@ -7,8 +7,11 @@
 
 <%= search_form_for @q do |f| %>
     <%= f.submit "Search by:", :class => 'btn btn-info btn-sm active' %> &nbsp &nbsp ->
-    <%= f.label :caption_cont, "Name:", :style => "display: inline-block" %>
-    <% if can %>
+    <%= f.label :caption_cont, "Caption:", :style => "display: inline-block" %>
+    <%= f.search_field :caption_cont, :id => "searchfpn" %>
+     <%= f.label :notes_cont, "Notes:", :style => "display: inline-block" %>
+    <%= f.search_field :notes_cont, :id => "searchfpn" %>
+   <% if can %>
       <%= link_to 'New Picture', new_picture_path, :class => 'btn btn-success btn-sm active' %>
     <% end %>
 <% end %>
@@ -16,9 +19,10 @@
 <table>
   <thead>
     <tr>
-      <th><%= sort_link "picture" %></th>
+      <th><%="Picture" %></th>
       <th><%= sort_link "caption" %></th>
       <th><%= sort_link "picture_date" %></th>
+      <th><%= sort_link "submitted_by" %></th>      
       <th><%= "Notes" %></th>
       <th><%= "Orig. Name" %></th>
       <th><%= "Size" %></th>
@@ -42,7 +46,8 @@
         </td>
         <td><%= link_to "#{picture.caption[0..20]}", picture %></td>
         <td><%= picture.picture_date %></td>
-        <td><%= picture.notes %></td>
+        <td><%= picture.submitted_by %></td>
+        <td><%= picture.notes[0..15] %></td>
         <td><%= picture.picture[:original].original_filename %></td>
         <td><%= number_with_delimiter(picture.picture[:original].size) %> kb</td> 
         <td><%= picture.picture[:original].height %></td>

@@ -87,11 +87,11 @@ class PicturesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def picture_params
-      params.require(:picture).permit( :picture, :remove_picture, :caption, :picture_date, :notes )
+      params.require(:picture).permit( :picture, :remove_picture, :caption, :picture_date, :notes, :submitted_by )
     end
 
     def sortable_columns
-      [ "caption", "picture_date"]
+      [ "caption", "picture_date", "submitted_by"]
     end
 
     def sort_column

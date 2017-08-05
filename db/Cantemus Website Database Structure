@@ -27,8 +27,8 @@ Left:date    //currently unused
 join_date:integer
 left_date:integer
 Notes:text
-Image:image_data		//headshot?
-Photo:photo_data        //2nd member uploadable image
+Image:image_data:text		 //headshot?
+Photo:photo_data:text        //2nd member uploadable image
 
 has_and_belongs_to_many Concerts
 has_and_belongs_to_manySongs    //soloist in
@@ -45,9 +45,12 @@ has_and_belongs_to_many Concerts
 has_and_belongs_to_many Singers //solos 
 
 
-Photos:
-Photo_data
-Caption
+Pictures:
+Picture_data
+Caption:string
+Picture_date:date
+Notes:text
+
 
 belongs_to 				 Concerts
 has_and_belongs_to_many  Singers  //singers in photo

@@ -20,7 +20,7 @@ class PictureUploader < Shrine
       size_500 = resize_to_limit!(io.download, 500,500)
       #size_500 = resize_to_limit(size_700, 500,500)
       #size_300 = resize_to_limit(size_500, 300,300)
-      size_150 = resize_to_limit(size_500, 150, 150)
+      #size_150 = resize_to_limit(size_500, 150, 150)
       thumb = resize_to_limit(size_150, 75, 75)
       { original: io, medium: size_500, small: size_150, thumb: thumb }
     end
