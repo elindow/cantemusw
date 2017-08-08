@@ -42,7 +42,7 @@
 <p>
   <strong>In Concerts: </strong>
   <% @song.concerts.order(:concert_year).each do |t| %>
-    <td><%= t.concert_year.to_s + '-' + t.name %></td>
+    <td><%= link_to t.concert_year.to_s + '-' + t.name, concert_path(t.id) %></td>
     -:- 
   <% end %>
 </p>
@@ -62,7 +62,7 @@
 <p>
   <strong>Soloists:</strong>
   <% @song.singers.order(:last_name).each do |t| %>
-    <td><%= t.first_name[0]+" "+t.last_name %></td>
+    <td><%= link_to t.first_name[0]+" "+t.last_name, singer_path(t.id) %></td>
     -:-  
   <% end %>
 </p>

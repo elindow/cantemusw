@@ -68,7 +68,7 @@
   <strong>Concerts:</strong><br />
   <% @singer.concerts.order(:concert_year).in_groups_of(8,false) do |concrts| %>
     <% for concert in concrts %>
-      <td><%= concert.concert_year.to_s + '-' + concert.name[0..20] %></td>
+      <td><%= link_to concert.concert_year.to_s + '-' + concert.name[0..20], concert_path(concert.id) %></td>
       -:- 
     <% end %>
     <br />
@@ -78,7 +78,7 @@
 <p>
   <strong>Soloist In:</strong>
   <% @singer.songs.order(:name).each do |t| %>
-    <td><%= t.name%></td>
+    <td><%= link_to t.name, song_path(t.id) %></td>
     -:- 
   <% end %>
 </p>
