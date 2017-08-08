@@ -56,17 +56,34 @@ class SongsController < ApplicationController
       if @song.update(song_params)
         format.html { redirect_to @song, notice: 'Song was successfully updated.' }
         format.json { render :show, status: :ok, location: @song }
-        songs = Song.all
+        #songs = Song.all
+        #byebug
+        #puts "got here - #{params[:song][:concert_ids]} - #{@song.id} - #{params[:song][:s_o]} - #{params[:song][:s_o1]}"
+        if !params[:song][:concert_ids][0].nil?
+          @program = Program.find_by_concert_id_and_song_id(params[:song][:concert_ids][0],@song.id)
+          @program.song_order = params[:song][:s_o1]
+          @program.save
+          puts "Song Id: #{@song.id} Concert ID: #{params[:song][:concert_ids][0]} Song Name: #{@song.name} Song Order: #{@program.song_order}"
+        end
+       if !params[:song][:concert_ids][1].nil?
+          @program = Program.find_by_concert_id_and_song_id(params[:song][:concert_ids][1],@song.id)
+          @program.song_order = params[:song][:s_o]
+          @program.save
+          puts "Song Id: #{@song.id} Concert ID: #{params[:song][:concert_ids][1]} Song Name: #{@song.name} Song Order: #{@program.song_order}"
+        end
+
+        if false
         for concert in Concert.all
           if !concert.songs.find_by_name(@song.name).nil?
             sid = concert.songs.find_by_name(@song.name).id   # get id of song in this concert
             @program = Program.find_by_song_id_and_concert_id(sid,concert.id)           # create program instance
             #@program.nil?
             @program.song_order = @song[:s_o]                  # update value
-            puts "Song Id: #{sid} Concert ID: #{concert.id} Song Name: #{@song.name} Song Order: #{@song[:s_o]}"
+            #puts "Song Id: #{sid} Concert ID: #{concert.id} Song Name: #{@song.name} Song Order: #{@song[:s_o]}"
             @program.save      
           end                               # save it
         end     
+        end
 
       else
         format.html { render :edit }
@@ -94,7 +111,7 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:name, :source, :composer, :lyricist, :arranger, :genre, :song_type, :notes, {:singer_ids => []}, {:concert_ids => []}, :s_o, programs_attributes: [ :song_order ] )
+      params.require(:song).permit(:name, :source, :composer, :lyricist, :arranger, :genre, :song_type, :notes, {:singer_ids => []}, {:concert_ids => []}, :s_o, :s_o1, :s_o2, :s_o3,  programs_attributes: [ :song_order ] )
     end
 
     def sortable_columns

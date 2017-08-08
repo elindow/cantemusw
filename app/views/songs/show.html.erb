@@ -54,7 +54,7 @@
         <% cid = concert.id %>
         <strong>Song Order 
         <%= "#{cy}" %>: </strong>
-        <%= Program.find_by_song_id_and_concert_id(@song.id,cid).song_order %> -:-
+        <%= Program.find_by_concert_id_and_song_id(cid,@song.id).song_order %> -:-
       <% end %>
     <% end %>
 </p>

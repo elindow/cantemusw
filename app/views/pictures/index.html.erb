@@ -49,12 +49,12 @@
             <td><%= picture.picture_date %></td>
             <td><%= picture.submitted_by %></td>
             <td><%= picture.notes[0..15] %></td>
-            <% !picture.picture[:original].nil? %>
+            <% if !picture.picture[:original].nil? %>
               <td><%= picture.picture[:original].original_filename %></td>
               <td><%= number_with_delimiter(picture.picture[:original].size) %> kb</td> 
               <td><%= picture.picture[:original].height %></td>
               <td><%= picture.picture[:original].width %></td>
-            < % end %>
+            <% end %>
           <% end %>
           <% if false %><td><%= link_to 'Show', song %></td><% end %>
           <% if policy(picture).update? %>

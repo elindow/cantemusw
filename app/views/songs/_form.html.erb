@@ -64,17 +64,35 @@
   </div>
 
   <div class="field">
-    <% for concert in Concert.all %>
+    <% @count = 0 %>
+    <% so = [0,0,0,0,0] %>
+    <% for concert in Concert.all %>  
       <% if !concert.songs.find_by_name(song.name).nil? %>
-        <% so = song.programs.find_by_song_id(song.id).song_order
-            if (so.nil?)
+        <% so[@count] = Program.find_by_concert_id_and_song_id(concert.id,song.id).song_order
+            if (so[@count].nil?)
               song.s_o = 0
-            else
-              song.s_o = so
+            elsif (@count == 0)    #crappy code because I don't fully understand using input hash arrays
+              @c_o = concert.id
+              song.s_o = so[@count]
+            elsif (@count == 1)
+              @c_o1 = concert.id
+              song.s_o1 = so[@count]
+            elsif (@count == 2)
+              @c_o2 = concert.id
+              song.s_o2 = so[@count]
+            elsif (@count == 3)
+              @c_o3 = concert.id
+              song.s_o3 = so[@count]
             end %>
         <strong><%= concert.concert_year %></strong>
         <%= f.label( " Song Order: " ) %>
-        <%= f.number_field :s_o, in: 0..30, size: 3 %>
+          <% if @count == 0 %>
+            <%= f.number_field :s_o, in: 0..30, size: 3 %>
+          <% elsif @count == 1 %>
+            <%= f.number_field :s_o1, in: 0..30, size: 3 %>
+          <% end %>
+        <% puts "got here - #{@count} - #{so[@count]} - #{@c_o} - #{@c_o1} > #{concert.id}" %>  
+        <% @count += 1 %>
       <% end %>
     <% end %>
   </div>
@@ -86,7 +104,7 @@
   <div class="field">
    <% for singer in Singer.all.order(:last_name) %>
      <% if (true)%>
-       <%= check_box_tag "song[singer_ids][]", singer.id, @song.singers.include?(singer) %>
+       <%= check_box_tag "song[singer_ids][]", singer.id, @song.singers.include?(singer) %>  
        <%= singer.first_name[0] + " " + singer.last_name %>
      <% end %>
      |
