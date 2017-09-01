@@ -59,14 +59,14 @@
        <%= check_box_tag "song[concert_ids][]", concert.id, @song.concerts.include?(concert) %>
        <%= concert.concert_year.to_s + '-' + concert.name[0..20] %>
      <% end %>
-     |
+     | 
    <%end%>
   </div>
 
   <div class="field">
     <% @count = 0 %>
     <% so = [0,0,0,0,0] %>
-    <% for concert in Concert.all %>  
+    <% for concert in Concert.all.order(:concert_year) %>  
       <% if !concert.songs.find_by_name(song.name).nil? %>
         <% so[@count] = Program.find_by_concert_id_and_song_id(concert.id,song.id).song_order
             if (so[@count].nil?)

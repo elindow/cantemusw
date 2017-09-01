@@ -61,13 +61,13 @@ class SongsController < ApplicationController
         #puts "got here - #{params[:song][:concert_ids]} - #{@song.id} - #{params[:song][:s_o]} - #{params[:song][:s_o1]}"
         if !params[:song][:concert_ids][0].nil?
           @program = Program.find_by_concert_id_and_song_id(params[:song][:concert_ids][0],@song.id)
-          @program.song_order = params[:song][:s_o1]
+          @program.song_order = params[:song][:s_o]
           @program.save
           puts "Song Id: #{@song.id} Concert ID: #{params[:song][:concert_ids][0]} Song Name: #{@song.name} Song Order: #{@program.song_order}"
         end
        if !params[:song][:concert_ids][1].nil?
           @program = Program.find_by_concert_id_and_song_id(params[:song][:concert_ids][1],@song.id)
-          @program.song_order = params[:song][:s_o]
+          @program.song_order = params[:song][:s_o1]
           @program.save
           puts "Song Id: #{@song.id} Concert ID: #{params[:song][:concert_ids][1]} Song Name: #{@song.name} Song Order: #{@program.song_order}"
         end
@@ -76,7 +76,7 @@ class SongsController < ApplicationController
         for concert in Concert.all
           if !concert.songs.find_by_name(@song.name).nil?
             sid = concert.songs.find_by_name(@song.name).id   # get id of song in this concert
-            @program = Program.find_by_song_id_and_concert_id(sid,concert.id)           # create program instance
+            @program = Program.find_by_concert_id_and_song_id(concert.id,sid)           # create program instance
             #@program.nil?
             @program.song_order = @song[:s_o]                  # update value
             #puts "Song Id: #{sid} Concert ID: #{concert.id} Song Name: #{@song.name} Song Order: #{@song[:s_o]}"

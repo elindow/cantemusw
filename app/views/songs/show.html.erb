@@ -48,7 +48,7 @@
 </p>
 
 <p>
-<% for concert in Concert.all %>
+<% for concert in Concert.all.order(:concert_year) %>
       <% if !concert.songs.find_by_name(@song.name).nil? %>
         <% cy = concert.concert_year %>
         <% cid = concert.id %>
