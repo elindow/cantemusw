@@ -71,7 +71,7 @@
       <% end %>
       <% else %>
         <strong> Program Order: </strong><br />
-        <% @concert.songs.sort_by{|song| (Program.find_by_song_id(song.id).song_order) || 1}.in_groups_of(10,false).each do |t_array| %>
+        <% @concert.songs.sort_by{|song| (Program.find_by_song_id_and_concert_id(song.id,@concert.id).song_order) || 1}.in_groups_of(10,false).each do |t_array| %>
           <% t_array.each do |t| %>
             <td><%= link_to t.name[0..20].ljust(20,' '), song_path(t.id) %></td>
             -:- 
