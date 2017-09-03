@@ -51,11 +51,15 @@
   <div><b> | Singers | </b></div>
 
   <div class="field"> 
-   <% for singer in Singer.all.order(:last_name) %>
-     <% if (true)%>
+   <%# for singer in Singer.all.order(:last_name) %>
+   <% Singer.all.sort_by{|singer| (singer.last_name)}.in_groups_of(12,false).each do |singer_array| %>
+     <% singer_array.each do |singer| %>
+      <% if (true) %>
        <%= check_box_tag "concert[singer_ids][]", singer.id, @concert.singers.include?(singer) %>
        <%= singer.first_name[0] + ". " + singer.last_name %> -:-
-     <% end %>
+      <% end %>
+    <% end %>
+    <br />
    <%end%>
   </div>
 <p></p>

@@ -83,13 +83,22 @@
             elsif (@count == 3)
               @c_o3 = concert.id
               song.s_o3 = so[@count]
-            end %>
+            elsif (@count == 4)
+              @c_o4 = concert.id
+              song.s_o4 = so[@count]
+           end %>
         <strong><%= concert.concert_year %></strong>
         <%= f.label( " Song Order: " ) %>
           <% if @count == 0 %>
             <%= f.number_field :s_o, in: 0..30, size: 3 %>
           <% elsif @count == 1 %>
             <%= f.number_field :s_o1, in: 0..30, size: 3 %>
+         <% elsif @count == 2 %>
+            <%= f.number_field :s_o2, in: 0..30, size: 3 %>
+         <% elsif @count == 3 %>
+            <%= f.number_field :s_o3, in: 0..30, size: 3 %>
+         <% elsif @count == 4 %>
+            <%= f.number_field :s_o4, in: 0..30, size: 3 %>
           <% end %>
         <% puts "got here - #{@count} - #{so[@count]} - #{@c_o} - #{@c_o1} > #{concert.id}" %>  
         <% @count += 1 %>

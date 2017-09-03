@@ -67,9 +67,27 @@ class SongsController < ApplicationController
         end
        if !params[:song][:concert_ids][1].nil?
           @program = Program.find_by_concert_id_and_song_id(params[:song][:concert_ids][1],@song.id)
-          @program.song_order = params[:song][:s_o1]
+          @program.song_order = params[:song][:s_o1 ]
           @program.save
           puts "Song Id: #{@song.id} Concert ID: #{params[:song][:concert_ids][1]} Song Name: #{@song.name} Song Order: #{@program.song_order}"
+        end
+       if !params[:song][:concert_ids][2].nil?
+          @program = Program.find_by_concert_id_and_song_id(params[:song][:concert_ids][2],@song.id)
+          @program.song_order = params[:song][:s_o2 ]
+          @program.save
+          puts "Song Id: #{@song.id} Concert ID: #{params[:song][:concert_ids][2]} Song Name: #{@song.name} Song Order: #{@program.song_order}"
+        end
+       if !params[:song][:concert_ids][3].nil?
+          @program = Program.find_by_concert_id_and_song_id(params[:song][:concert_ids][3],@song.id)
+          @program.song_order = params[:song][:s_o3 ]
+          @program.save
+          puts "Song Id: #{@song.id} Concert ID: #{params[:song][:concert_ids][3]} Song Name: #{@song.name} Song Order: #{@program.song_order}"
+        end
+       if !params[:song][:concert_ids][4].nil?
+          @program = Program.find_by_concert_id_and_song_id(params[:song][:concert_ids][4],@song.id)
+          @program.song_order = params[:song][:s_o4 ]
+          @program.save
+          puts "Song Id: #{@song.id} Concert ID: #{params[:song][:concert_ids][4]} Song Name: #{@song.name} Song Order: #{@program.song_order}"
         end
 
         if false
@@ -111,7 +129,7 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:name, :source, :composer, :lyricist, :arranger, :genre, :song_type, :notes, {:singer_ids => []}, {:concert_ids => []}, :s_o, :s_o1, :s_o2, :s_o3,  programs_attributes: [ :song_order ] )
+      params.require(:song).permit(:name, :source, :composer, :lyricist, :arranger, :genre, :song_type, :notes, {:singer_ids => []}, {:concert_ids => []}, :s_o,:s_o1,:s_o2,:s_o3,:s_o4, programs_attributes: [ :song_order ] )
     end
 
     def sortable_columns

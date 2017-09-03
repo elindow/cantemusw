@@ -47,15 +47,17 @@
 
 <p>
   <strong>Singers:</strong>
-    <% @concert.singers.sort_by{|singer| (singer.last_name)}.each do |t| %>
-      <td><%= link_to t.first_name[0]+" "+t.last_name, singer_path(t.id) %></td>
-      -:- 
- 
-      <% end %>
+    <% @concert.singers.sort_by{|singer| (singer.last_name)}.in_groups_of(20,false).each do |t_array| %>
+      <% t_array.each do |t| %>
+        <td><%= link_to t.first_name[0]+" "+t.last_name, singer_path(t.id) %></td>
+        -:- 
+        <% end %>
+      <br />
+    <% end %>
 </p>
 
 <p>
-  <strong>Songs Sorted by </strong>
+  <strong></strong>
 
       <% Program.where(concert_id: [@concert.id]).each do |so| %>
         <% if so.song_order.nil? 
@@ -64,20 +66,27 @@
       <% end %>
 
       <% if !@song_sort %>
-          <strong> Name: </strong>          
+          <strong> Songs Sorted by Name: </strong>          
           <% @concert.songs.sort_by{|song| (song.name)}.each do |t| %>
           <td><%= link_to t.name, song_path(t.id) %></td>
           -:- 
       <% end %>
       <% else %>
-        <strong> Program Order: </strong><br />
-        <% @concert.songs.sort_by{|song| (Program.find_by_song_id_and_concert_id(song.id,@concert.id).song_order) || 1}.in_groups_of(10,false).each do |t_array| %>
+        <div class-"container">
+        <strong> Songs Sorted by Program Order: </strong><br />
+        <% count = 1 %>
+        <% @concert.songs.sort_by{|song| (Program.find_by_song_id_and_concert_id(song.id,@concert.id).song_order) || 1}.in_groups_of(6,false).each do |t_array| %>
+          <div class="row" >
           <% t_array.each do |t| %>
-            <td><%= link_to t.name[0..20].ljust(20,' '), song_path(t.id) %></td>
-            -:- 
+            <div class="col-sm-2">
+              <%= count.to_s + "-" %>
+              <td><%= link_to t.name[0..30], song_path(t.id) %></td>
+            </div>
+            <% count += 1 %>
           <% end %>
-        <br />
+          </div>
         <% end %>
+        </div>
     <% end %>
 </p>
 
